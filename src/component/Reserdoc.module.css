@@ -1,0 +1,40 @@
+.bg {
+  position: relative;
+  width: 60%;
+  height: 600px;
+  padding-top: 60px;
+  margin: 0 auto;
+  background-color: #F8FBFB;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg .hosname {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.bg .doctor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.bg .pass {
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  bottom: 0;
+  right: 0;
+}
+.bg .pass .next {
+  font-weight: bold;
+}
+.bg .pass .next:hover {
+  transform: scale(1.1);
+  transition: 0.3 ease-in-out;
+}

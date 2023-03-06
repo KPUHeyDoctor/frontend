@@ -1,0 +1,16 @@
+{
+    "hospital": [
+    {
+      "name": "시흥병원",
+      "position_x": 23123,
+      "position_y": 123123,
+      "time": true
+    },
+    {
+      "name": "시흥병원2",
+      "position_x": 23124,
+      "position_y":123124,
+      "time": true
+    }
+  ]
+}

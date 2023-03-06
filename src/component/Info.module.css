@@ -1,0 +1,24 @@
+.info {
+  background-color: #F8FBFB;
+  top: 0px;
+  width: 90%;
+  height: 550px;
+  padding-top: 60px;
+}
+
+.info .swiper_01 {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+.info .swiper_02 {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}

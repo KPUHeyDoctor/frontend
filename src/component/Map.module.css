@@ -1,0 +1,25 @@
+.map {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  height: 810px;
+  margin: 0 auto;
+}
+
+.hoslist {
+  background-color: rgba(238, 238, 238, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 90%;
+  height: 90px;
+}
+
+button {
+  background-color: transparent;
+  font-size: 20px;
+  margin: 30px;
+  border: none;
+}

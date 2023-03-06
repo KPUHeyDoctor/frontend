@@ -1,0 +1,17 @@
+.bg {
+  position: relative;
+  width: 60%;
+  height: 600px;
+  padding-top: 60px;
+  margin: 0 auto;
+  background-color: #F8FBFB;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg .hosname {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}

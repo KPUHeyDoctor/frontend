@@ -1,0 +1,35 @@
+.bg {
+  width: 60%;
+  height: 600px;
+  padding-top: 60px;
+  margin: 0 auto;
+  background-color: #F8FBFB;
+}
+.bg .join {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+.bg .chosbtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bg .chosbtn .mem {
+  border: none;
+  background-color: transparent;
+}
+.bg .chosbtn .memrec {
+  display: flex;
+  width: 200px;
+}
+
+.bg .chosbtn .enter {
+  border: none;
+  background-color: transparent;
+}
+.bg .chosbtn .entrec {
+  display: flex;
+  width: 200px;
+}
