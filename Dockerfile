@@ -18,3 +18,4 @@ RUN npm run build
 
 # 앱 실행
 CMD ["npm", "start"]
+
