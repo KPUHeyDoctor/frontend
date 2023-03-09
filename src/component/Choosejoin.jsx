@@ -3,7 +3,7 @@ import join from '../img/join.png';
 import styles from '../component/Choosejoin.module.css';
 import Rec from '../img/rectangle.png';
 
-function Chooselog() {
+function Choosejoin() {
   return(
     <div className={styles.bg}>
       <div className={styles.join}>
@@ -25,4 +25,4 @@ function Chooselog() {
   );
 }
 
-export default Chooselog;
+export default Choosejoin;

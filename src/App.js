@@ -1,5 +1,3 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './page/MainPage.jsx';
 import ChooseLogin from './page/ChooseLogin.jsx';
@@ -14,8 +12,6 @@ import ReserTime from './page/ReserTime.jsx';
 import MyPage from './page/MyPage.jsx';
 
 function App() {
-
-
 
   return(
     <BrowserRouter>
@@ -33,6 +29,7 @@ function App() {
         <Route path="/mypage" element={<MyPage />}/>
       </Routes>
     </BrowserRouter>
+    
   );
 }
 
