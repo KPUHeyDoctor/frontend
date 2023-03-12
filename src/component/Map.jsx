@@ -1,5 +1,6 @@
+import axios from 'axios';
 import { Map, MapMarker} from 'react-kakao-maps-sdk';
-import { useState, useEffect } from 'react';
+import { useState, useEffect} from 'react';
 import styles from '../component/Map.module.css';
 
 function KakaoMap() {
@@ -39,11 +40,22 @@ function KakaoMap() {
     }
   }, []);
 
+  const [buttonText, setButtonText] = useState('전체병원')
+
+  function btn01Click() {
+    axios.get('http://localhost:5001/api/hospitals')
+      .then(response => {
+        setButtonText(console.log(response.data));
+      })
+      .catch(error => error);
+  } 
+
   return (
     <>
     <div className={styles.hoslist}>
       <div className={styles.btns}>
-        <button className={styles.btn01}>전체병원</button>
+        <button onClick={btn01Click} className={styles.btn01}>
+          {buttonText}</button>
         <button className={styles.btn02}>내과</button>
         <button className={styles.btn03}>이비인후과</button>
         <button className={styles.btn04}>소아과</button>
