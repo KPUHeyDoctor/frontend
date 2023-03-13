@@ -1,37 +1,44 @@
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function AlertEnter() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
 
-  function handleApiSuccess() {
-    axios.get('http://localhost:5000/api/hospitals', { responseType: 'json'})
-      .then(response => {
-        const confirmed = window.confirm("'안윤주'님이 4시에 예약하셨습니다.");
-        if(confirmed) {
-          setData(response.data);
-        } else {
-          console.log("예약이 취소되었습니다.");
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/hospitals');
+      setData(response.data);
+    } catch (error) {
+      console.error(error);
     }
+  }
 
-    return(
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const handleClick = () => {
+    setData([]);
+    fetchData();
+  }
+
+  return (
+    <>
       <div>
-        {data ? (
-          <div>
-            <h2>API</h2>
-            <p>{data}</p>
-          </div>
-        ) : (
-          <button onClick={handleApiSuccess}>예약</button>
+        <button onClick={handleClick}>데이터 가져오기</button>
+        {data.length > 0 && (
+          <ul>
+            {data.map((item, index) => (
+              <li key={index}>
+                <h2>{item.name}</h2>
+                <p>이름: {item.name}</p>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
-    );
+    </>
+  );
 }
-
 
 export default AlertEnter;

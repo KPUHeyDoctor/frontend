@@ -1,10 +1,10 @@
-import SubHeader from "../component/SubHeader";
+// import Header from "../component/Header";
 import AlertEnter from "../component/AlertEnter";
 
 function EnterPage() {
   return(
     <>
-    <SubHeader />
+    {/* <Header /> */}
     <AlertEnter />
     </>
   );
