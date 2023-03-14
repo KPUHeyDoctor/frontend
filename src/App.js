@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// import MainPage from './page/MainPage.jsx';
+import MainPage from './page/MainPage.jsx';
 import ChooseLogin from './page/ChooseLogin.jsx';
 import ChooseJoin from './page/ChooseJoin.jsx';
 import MemberLogin from './page/MemberLogin.jsx';
@@ -10,14 +10,14 @@ import ReserDoc from './page/ReserDoc.jsx';
 import ReserDate from './page/ReserDate.jsx';
 import ReserTime from './page/ReserTime.jsx';
 import MyPage from './page/MyPage.jsx';
-import EnterPage from './page/EnterPage.jsx';
+// import EnterPage from './page/EnterPage.jsx';
 
 function App() {
 
   return(
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<EnterPage />}/>
+        <Route path="/" element={<MainPage />}/>
         <Route path="/choologin" element={<ChooseLogin />}/>
         <Route path="/choojoin" element={<ChooseJoin />}/>
         <Route path="/memlog" element={<MemberLogin />}/>
