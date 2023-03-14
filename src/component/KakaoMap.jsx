@@ -2,7 +2,6 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from '../component/KakaoMap.module.css';
-// import HosModal from '../component/HosModal.jsx';
 
 function KakaoMap() {
   const [state, setState] = useState({
@@ -51,7 +50,7 @@ function KakaoMap() {
         markers: [],
       }));
     } else {
-      axios.get('http://localhost:5000/api/hospitals')
+      axios.get('http://localhost:5001/api/hospitals')
         .then(response => {
           const markers = response.data.map(marker => ({
             name: marker.name,
