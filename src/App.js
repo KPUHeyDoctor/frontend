@@ -10,7 +10,6 @@ import ReserDoc from './page/ReserDoc.jsx';
 import ReserDate from './page/ReserDate.jsx';
 import ReserTime from './page/ReserTime.jsx';
 import MyPage from './page/MyPage.jsx';
-// import EnterPage from './page/EnterPage.jsx';
 
 function App() {
 
