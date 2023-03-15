@@ -13,7 +13,6 @@ function KakaoMap() {
     isLoading: true,
     showMarkers: false,     // 전체병원 마커 보이기 여부 상태값
     markers: [],            // 전체병원 마커 위치 정보 배열
-    // selectedMarker: null,   // 선택한 마커 정보
   });
 
   useEffect(() => {
@@ -29,7 +28,6 @@ function KakaoMap() {
             },
             isLoading: false,
           }));
-
         },
         (err) => {
           setState((prev) => ({
@@ -40,102 +38,135 @@ function KakaoMap() {
         }
       );
     }
-  }, []);
 
-  const handleShowMarkers = () => {
-    if (state.showMarkers) {
-      setState((prev) => ({
-        ...prev,
-        showMarkers: false,
-        markers: [],
-      }));
-    } else {
-      axios.get('http://localhost:5001/api/hospitals')
-        .then(response => {
-          const markers = response.data.map(marker => ({
+    axios.get('http://localhost:5000/api/hospitals')
+      .then(response => {
+        const markers = response.data.map(marker => {
+          const isOpen = checkOpen(marker.time);
+          return {
             name: marker.name,
             lat: marker.lat,
-            lng: marker.logt,
-          }));
+            lng: marker.lng,
+            isOpen,
+          };
+        });
 
+        setState((prev) => ({
+          ...prev,
+          markers,
+        }));
+      })
+      .catch(error => console.log(error));
+  }, []);
+
+    // 영업 여부를 확인하는 함수
+    const checkOpen = (timeStr) => {
+      // 문자열을 ":"을 기준으로 분리하여 시간과 분으로 나눔
+      const [startHour, startMinute, endHour, endMinute] = timeStr.split(/[:~-]/);
+      // 현재 시간을 가져옴
+      const now = new Date();
+      const currentHour = now.getHours();
+      const currentMinute = now.getMinutes();
+  
+      // 현재 시간이 startHour와 endHour 사이에 있는 경우 영업중으로 판단
+      if (currentHour >= startHour && currentHour <= endHour) {
+        // startHour와 endHour가 같은 경우, startMinute과 endMinute을 비교하여 판단
+        if (currentHour === startHour && currentHour === endHour) {
+          return currentMinute >= startMinute && currentMinute < endMinute;
+        }
+        // startHour와 endHour가 다른 경우, startHour와 endHour을 비교하여 판단
+        if (currentHour === startHour) {
+          return currentMinute >= startMinute;
+        }
+        if (currentHour === endHour) {
+          return currentMinute < endMinute;
+        }
+        return true;
+      }
+      return false;
+    };
+  
+    const handleShowMarkers = () => {
+      if (state.showMarkers) {
+        setState((prev) => ({
+          ...prev,
+          showMarkers: false,
+          markers: [],
+        }));
+      } else {
+        axios.get('http://localhost:5000/api/hospitals')
+        .then(response => {
+          const markers = response.data.map(marker => {
+            const isOpen = checkOpen(marker.time);
+            return {
+              name: marker.name,
+              lat: marker.lat,
+              lng: marker.lng,
+              isOpen,
+              time: marker.time,
+            };
+          });
+  
           setState((prev) => ({
             ...prev,
             showMarkers: true,
-            markers: markers,
+            markers,
           }));
         })
         .catch(error => console.log(error));
-    }
-  }
-
-  // const handleMarkerClick = (marker) => {
-  //   setState((prev) => ({
-  //     ...prev,
-  //     selectedMarker: marker,       // 선택한 마커 정보 업데이트
-  //   }));
-  // }
-
-  return (
-    <>
-      <div className={styles.hoslist}>
-        <div className={styles.btns}>
-          <button className={styles.btn01} onClick={handleShowMarkers}>전체병원</button>
-          <button className={styles.btn02}>내과</button>
-          <button className={styles.btn03}>이비인후과</button>
-          <button className={styles.btn04}>소아과</button>
-          <button className={styles.btn05}>정형외과</button>
+      }
+    };
+  
+    return (
+      <>
+        <div className={styles.hoslist}>
+          <div className={styles.btns}>
+            <button className={styles.btn01} onClick={handleShowMarkers}>전체병원</button>
+            <button className={styles.btn02}>내과</button>
+            <button className={styles.btn03}>이비인후과</button>
+            <button className={styles.btn04}>소아과</button>
+            <button className={styles.btn05}>정형외과</button>
+          </div>
         </div>
-      </div>
-
-      {/* 선택한 마커 정보가 있을 때만 모달 띄우기
-      {state.selectedMarker && (
-        <HosModal
-          name={state.selectedMarker.name}
-          lat={state.selectedMarker.lat}
-          lng={state.selectedMarker.lng}
-          onClose={() => setState((prev) => ({...prev, selectedMarker: null}))}
-        />
-      )} */}
-
-      <Map // 지도를 표시할 Container
-        center={state.center}
-        className={styles.map}
-        level={3} // 지도의 확대 레벨
-      >
-        {!state.isLoading && (
-          <MapMarker
-            position={state.center}    // 현재위치
-            image={{
-              src: "../img/cloca.gif",
-              size: {
-                width: 50,
-                height: 50,
-              }
-            }}
-           />
-        )}
-
-        {/* 전체병원 마커 표시 */}
-        {state.showMarkers &&
-          state.markers.map((marker, index) => (
+  
+        <Map // 지도를 표시할 Container
+          center={state.center}
+          className={styles.map}
+          level={3} // 지도의 확대 레벨
+        >
+          {!state.isLoading && (
             <MapMarker
-              key={index}
-              position={marker}
-              title={marker.name}
-              // onClick={() => handleMarkerClick(marker)}     // 마커 클릭 이벤트 핸들러
-              // image={{
-              //   src: "../img/hosmark.png",
-              //   size: {
-              //     width: 50,
-              //     height: 50,
-              //   }
-              // }}
+              position={state.center}    // 현재위치
+              image={{
+                src: "../img/cloca.gif",
+                size: {
+                  width: 50,
+                  height: 50,
+                }
+              }}
             />
-          ))
-        }
-      </Map>
-    </>
-  );
-}
+          )}
+
+          {/* 전체병원 마커 표시 */}
+          {state.showMarkers &&
+            state.markers.map((marker, index) => (
+              <MapMarker
+                key={index}
+                position={marker}
+                title={marker.name}
+                image={{
+                  src: checkOpen(marker.time) ? "../img/cloca.gif" : "../img/cloca.png",
+                  size: {
+                    width: 50,
+                    height: 50,
+                  },
+                }}
+              />
+            ))
+          }
+        </Map>
+      </>
+    );
+  }
 
 export default KakaoMap;
