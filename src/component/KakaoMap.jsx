@@ -94,7 +94,7 @@ function KakaoMap() {
           markers: [],
         }));
       } else {
-        axios.get('http://localhost:5000/api/hospitals/categories/all')
+        axios.get('http://localhost:5001/api/hospitals/categories/all')
         .then(response => {
           const markers = response.data.map(marker => {
             const isOpen = checkOpen(marker.time);

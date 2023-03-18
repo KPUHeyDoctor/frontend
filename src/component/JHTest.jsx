@@ -50,7 +50,7 @@ function JHTest() {
         markers: [],
       }));
     } else {
-      axios.get('http://localhost:5001/api/hospitals')
+      axios.get('http://localhost:5001/api/hospitals/categories/all')
         .then(response => {
           const markers = response.data.map(marker => ({
             name: marker.BIZPLC_NM,

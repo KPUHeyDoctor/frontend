@@ -1,8 +1,8 @@
 import Header from '../component/Header';
 import Info from '../component/Info';
 import MainTec from '../component/MainTec';
-import KakaoMap from '../component/KakaoMap';
-// import JHTest from '../component/JHTest';
+// import KakaoMap from '../component/KakaoMap';
+import JHTest from '../component/JHTest';
 
 function MainPage() {
   return (
@@ -10,8 +10,8 @@ function MainPage() {
     <Header />
     <Info />
     <MainTec />
-    <KakaoMap />
-    {/* <JHTest /> */}
+    {/* <KakaoMap /> */}
+    <JHTest />
     </>
   );
 }
