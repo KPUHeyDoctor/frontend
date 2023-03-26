@@ -1,7 +1,8 @@
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import styles from '../component/KakaoMap.module.css';
+import styles from '../component/JHTest.module.css';
+import Modal from 'react-modal';
 
 function JHTest() {
   const [state, setState] = useState({
@@ -14,7 +15,6 @@ function JHTest() {
     showMarkers: false,     // 전체병원 마커 보이기 여부 상태값
     markers: [],            // 전체병원 마커 위치 정보 배열
   });
-
   useEffect(() => {
     if (navigator.geolocation) {
       // GeoLocation을 이용해서 접속 위치를 얻어옵니다.
@@ -28,7 +28,6 @@ function JHTest() {
             },
             isLoading: false,
           }));
-
         },
         (err) => {
           setState((prev) => ({
@@ -40,154 +39,149 @@ function JHTest() {
       );
     }
   }, []);
-
+  
   // 전체병원
   const ShowMarkersAll = () => {
-    if (state.showMarkers) {
-      setState((prev) => ({
-        ...prev,
-        showMarkers: false,
-        markers: [],
-      }));
-    } else {
-      axios.get('http://localhost:5001/api/hospitals/categories/all')
-        .then(response => {
-          const markers = response.data.map(marker => ({
-            name: marker.BIZPLC_NM,
-            lat: marker.REFINE_WGS84_LAT,
-            lng: marker.REFINE_WGS84_LOGT,
-          }));
-
-          setState((prev) => ({
-            ...prev,
-            showMarkers: true,
-            markers: markers,
-          }));
-        })
-        .catch(error => console.log(error));
-    }
-  }
-
+    axios.get('http://localhost:5001/api/hospitals/categories/all')
+      .then(response => {
+        const markers = response.data.map(marker => ({
+          name: marker.BIZPLC_NM,
+          lat: marker.REFINE_WGS84_LAT,
+          lng: marker.REFINE_WGS84_LOGT,
+        }));
+        setState((prev) => ({
+          ...prev,
+          showMarkers: true,
+          markers: [
+            ...prev.markers, // 이전 마커 데이터 유지
+            ...markers // 새로운 마커 데이터 추가
+          ],
+        }));
+      })
+      .catch(error => console.log(error));
+  };
+  
   // 내과
   const ShowMarkersNae = () => {
-    if (state.showMarkers) {
-      setState((prev) => ({
-        ...prev,
-        showMarkers: false,
-        markers: [],
-      }));
-    } else {
-      axios.get('http://localhost:5001/api/hospitals/categories/nae')
-        .then(response => {
-          const markers = response.data.map(marker => ({
-            name: marker.BIZPLC_NM,
-            lat: marker.REFINE_WGS84_LAT,
-            lng: marker.REFINE_WGS84_LOGT,
-          }));
-
-          setState((prev) => ({
-            ...prev,
-            showMarkers: true,
-            markers: markers,
-          }));
-        })
-        .catch(error => console.log(error));
-    }
-  }
-
+    axios.get('http://localhost:5001/api/hospitals/categories/nae')
+      .then(response => {
+        const markers = response.data.map(marker => ({
+          name: marker.BIZPLC_NM,
+          lat: marker.REFINE_WGS84_LAT,
+          lng: marker.REFINE_WGS84_LOGT,
+        }));
+        setState((prev) => ({
+          ...prev,
+          showMarkers: true,
+          markers: [
+            ...prev.markers, // 이전 마커 데이터 유지
+            ...markers // 새로운 마커 데이터 추가
+          ],
+        }));
+      })
+      .catch(error => console.log(error));
+  };
+  
   //이비인후과
   const ShowMarkersEbin = () => {
-    if (state.showMarkers) {
-      setState((prev) => ({
-        ...prev,
-        showMarkers: false,
-        markers: [],
-      }));
-    } else {
-      axios.get('http://localhost:5001/api/hospitals/categories/ebin')
-        .then(response => {
-          const markers = response.data.map(marker => ({
-            name: marker.BIZPLC_NM,
-            lat: marker.REFINE_WGS84_LAT,
-            lng: marker.REFINE_WGS84_LOGT,
-          }));
-
-          setState((prev) => ({
-            ...prev,
-            showMarkers: true,
-            markers: markers,
-          }));
-        })
-        .catch(error => console.log(error));
-    }
-  }
-
+    axios.get('http://localhost:5001/api/hospitals/categories/ebin')
+      .then(response => {
+        const markers = response.data.map(marker => ({
+          name: marker.BIZPLC_NM,
+          lat: marker.REFINE_WGS84_LAT,
+          lng: marker.REFINE_WGS84_LOGT,
+        }));
+        setState((prev) => ({
+          ...prev,
+          showMarkers: true,
+          markers: [
+            ...prev.markers, // 이전 마커 데이터 유지
+            ...markers // 새로운 마커 데이터 추가
+          ],
+        }));
+      })
+      .catch(error => console.log(error));
+  };
+  
   //소아과
   const ShowMarkersKids = () => {
-    if (state.showMarkers) {
-      setState((prev) => ({
-        ...prev,
-        showMarkers: false,
-        markers: [],
-      }));
-    } else {
-      axios.get('http://localhost:5001/api/hospitals/categories/kids')
-        .then(response => {
-          const markers = response.data.map(marker => ({
-            name: marker.BIZPLC_NM,
-            lat: marker.REFINE_WGS84_LAT,
-            lng: marker.REFINE_WGS84_LOGT,
-          }));
-
-          setState((prev) => ({
-            ...prev,
-            showMarkers: true,
-            markers: markers,
-          }));
-        })
-        .catch(error => console.log(error));
-    }
-  }
-
+    axios.get('http://localhost:5001/api/hospitals/categories/kids')
+      .then(response => {
+        const markers = response.data.map(marker => ({
+          name: marker.BIZPLC_NM,
+          lat: marker.REFINE_WGS84_LAT,
+          lng: marker.REFINE_WGS84_LOGT,
+        }));
+        setState((prev) => ({
+          ...prev,
+          showMarkers: true,
+          markers: [
+            ...prev.markers, // 이전 마커 데이터 유지
+            ...markers // 새로운 마커 데이터 추가
+          ],
+        }));
+      })
+      .catch(error => console.log(error));
+  };
+  
   //정형외과
   const ShowMarkersBone = () => {
-    if (state.showMarkers) {
-      setState((prev) => ({
-        ...prev,
-        showMarkers: false,
-        markers: [],
-      }));
-    } else {
-      axios.get('http://localhost:5001/api/hospitals/categories/bone')
-        .then(response => {
-          const markers = response.data.map(marker => ({
-            name: marker.BIZPLC_NM,
-            lat: marker.REFINE_WGS84_LAT,
-            lng: marker.REFINE_WGS84_LOGT,
-          }));
+    axios.get('http://localhost:5001/api/hospitals/categories/bone')
+      .then(response => {
+        const markers = response.data.map(marker => ({
+          name: marker.BIZPLC_NM,
+          lat: marker.REFINE_WGS84_LAT,
+          lng: marker.REFINE_WGS84_LOGT,
+        }));
+        setState((prev) => ({
+          ...prev,
+          showMarkers: true,
+          markers: [
+            ...prev.markers, // 이전 마커 데이터 유지
+            ...markers // 새로운 마커 데이터 추가
+          ],
+        }));
+      })
+      .catch(error => console.log(error));
+  };
 
-          setState((prev) => ({
-            ...prev,
-            showMarkers: true,
-            markers: markers,
-          }));
-        })
-        .catch(error => console.log(error));
-    }
-  }
+  const onMarkerClick = (marker) => {
+    const selectedName = marker.name;
+    axios.get('http://localhost:5001/api/hospitals/categories/bone', { params: { name: selectedName } })
+      .then(response => {
+        console.log(response.data);
+        const data = response.data;
+        setSelectedHospital(data);
+        handleModalOpen();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedHospital, setSelectedHospital] = useState(null);
+  const handleModalOpen = () => setIsModalOpen(true);
+  const handleModalClose = () => setIsModalOpen(false);
+
+  const modalContent = selectedHospital && (
+    <div>
+      <h2>{selectedHospital.name}</h2>
+      <p>{selectedHospital.address}</p>
+    </div>
+  );
+  
   return (
     <>
       <div className={styles.hoslist}>
         <div className={styles.btns}>
-          <button className={styles.btn01} onClick={ShowMarkersAll}>전체병원</button>
-          <button className={styles.btn02} onClick={ShowMarkersNae}>내과</button>
-          <button className={styles.btn03} onClick={ShowMarkersEbin}>이비인후과</button>
-          <button className={styles.btn04} onClick={ShowMarkersKids}>소아과</button>
-          <button className={styles.btn05} onClick={ShowMarkersBone}>정형외과</button>
+          <button className={'&{styles.btn} &{styles.btn01}'} onClick={ShowMarkersAll}>전체병원</button>
+          <button className={'&{styles.btn} &{styles.btn02}'} onClick={ShowMarkersNae}>내과</button>
+          <button className={'&{styles.btn} &{styles.btn03}'} onClick={ShowMarkersEbin}>이비인후과</button>
+          <button className={'&{styles.btn} &{styles.btn04}'} onClick={ShowMarkersKids}>소아과</button>
+          <button className={'&{styles.btn} &{styles.btn05}'} onClick={ShowMarkersBone}>정형외과</button>
         </div>
       </div>
-
       <Map // 지도를 표시할 Container
         center={state.center}
         className={styles.map}
@@ -206,19 +200,22 @@ function JHTest() {
            />
         )}
 
-        {/* 전체병원 마커 표시 */}
         {state.showMarkers &&
           state.markers.map((marker, index) => (
             <MapMarker
               key={index}
               position={marker}
               title={marker.name}
+              onClick={() => onMarkerClick(marker)}
             />
           ))
         }
       </Map>
+
+      <Modal isOpen={isModalOpen} onRequestClose={handleModalClose}>
+        {modalContent}
+      </Modal>
     </>
   );
 }
-
 export default JHTest;

@@ -27,3 +27,13 @@
   transform: scale(1.1);
   transition: 0.3 ease-in-out;
 }
+
+.tec .map {
+  background-color: #FFF;
+  border: none;
+  margin: 20px;
+}
+.tec .map:hover {
+  transform: scale(1.1);
+  transition: 0.3 ease-in-out;
+}
