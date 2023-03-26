@@ -2,7 +2,6 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from '../component/JHTest.module.css';
-import Modal from 'react-modal';
 
 function JHTest() {
   const [state, setState] = useState({
@@ -144,32 +143,6 @@ function JHTest() {
       })
       .catch(error => console.log(error));
   };
-
-  const onMarkerClick = (marker) => {
-    const selectedName = marker.name;
-    axios.get('http://localhost:5001/api/hospitals/categories/bone', { params: { name: selectedName } })
-      .then(response => {
-        console.log(response.data);
-        const data = response.data;
-        setSelectedHospital(data);
-        handleModalOpen();
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedHospital, setSelectedHospital] = useState(null);
-  const handleModalOpen = () => setIsModalOpen(true);
-  const handleModalClose = () => setIsModalOpen(false);
-
-  const modalContent = selectedHospital && (
-    <div>
-      <h2>{selectedHospital.name}</h2>
-      <p>{selectedHospital.address}</p>
-    </div>
-  );
   
   return (
     <>
@@ -206,15 +179,20 @@ function JHTest() {
               key={index}
               position={marker}
               title={marker.name}
-              onClick={() => onMarkerClick(marker)}
+              onClick={() => {
+                const selectedName = marker.name;
+                axios.get('http://localhost:5000', { params: { name: selectedName } })
+                  .then(response => {
+                    console.log(response.data);
+                  })
+                  .catch(error => {
+                    console.log(error)
+                  })
+              }}
             />
           ))
         }
       </Map>
-
-      <Modal isOpen={isModalOpen} onRequestClose={handleModalClose}>
-        {modalContent}
-      </Modal>
     </>
   );
 }
