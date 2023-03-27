@@ -17,9 +17,20 @@
   height: 90px;
 }
 
-button {
+.btns button {
   background-color: transparent;
   font-size: 20px;
-  margin: 30px;
+  font-weight: 500px;
+  color: rgb(100, 100, 100);
+  padding: 30px;
+  border: none;
+}
+
+.btns button:focus {
+  background-color: transparent;
+  font-size: 22px;
+  font-weight: 550;
+  color: black;
+  letter-spacing: -2px;
   border: none;
 }
