@@ -81,7 +81,7 @@ function KakaoMap() {
             lat: marker.REFINE_WGS84_LAT,
             lng: marker.REFINE_WGS84_LOGT,
             isOpen,
-            time: marker.time,
+            time: marker.HOS_TIME,
           };
         });
 
@@ -105,7 +105,7 @@ function KakaoMap() {
             lat: marker.REFINE_WGS84_LAT,
             lng: marker.REFINE_WGS84_LOGT,
             isOpen,
-            time: marker.time,
+            time: marker.HOS_TIME,
           };
         });
 
@@ -129,7 +129,7 @@ function KakaoMap() {
             lat: marker.REFINE_WGS84_LAT,
             lng: marker.REFINE_WGS84_LOGT,
             isOpen,
-            time: marker.time,
+            time: marker.HOS_TIME,
           };
         });
 
@@ -153,7 +153,7 @@ function KakaoMap() {
             lat: marker.REFINE_WGS84_LAT,
             lng: marker.REFINE_WGS84_LOGT,
             isOpen,
-            time: marker.time,
+            time: marker.HOS_TIME,
           };
         });
 
@@ -177,7 +177,7 @@ function KakaoMap() {
             lat: marker.REFINE_WGS84_LAT,
             lng: marker.REFINE_WGS84_LOGT,
             isOpen,
-            time: marker.time,
+            time: marker.HOS_TIME,
           };
         });
 
@@ -189,6 +189,26 @@ function KakaoMap() {
       })
       .catch(error => console.log(error));
   };
+
+  const [showModal, setShowModal] = useState(false);
+  const [hospitalInfo, setHospitalInfo] = useState(null);     // 받아온 병원 정보를 저장할 상태
+
+  function HospitalModal({ hospitalInfo, onClose }) {
+    console.log(hospitalInfo);
+    console.log(onClose);
+
+    return (
+      <div className={styles.modal}>
+        <div className={styles.modalcontent}>
+          <button onClick={onClose}>Close</button>
+          <h1>{hospitalInfo[0].BIZPLC_NM}</h1>
+          <p>{hospitalInfo[0].REFINE_ROADNM_ADDR}</p>
+          <p>{hospitalInfo[0].LOCPLC_FACLT_TELNO_DTLS}</p>
+          <button>예약</button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -218,7 +238,7 @@ function KakaoMap() {
             }}
            />
         )}
-
+      
         {state.showMarkers &&
           state.markers.map((marker, index) => (
             <MapMarker
@@ -227,14 +247,18 @@ function KakaoMap() {
               title={marker.name}
               onClick={() => {
                 const selectedName = marker.name;
-                axios.get('/api/hospitals/categories/all', { params: { name: selectedName } })
+                axios.get('http://localhost:5001/api/hospitals/categories/findName', { params: { hospital_name: selectedName } })
                   .then(response => {
-                    console.log(response.data);
+                    setHospitalInfo(response.data);
+                    // console.log(hospitalInfo);
+                    setShowModal(true);
+                    // console.log(showModal);
                   })
                   .catch(error => {
                     console.log(error)
                   })
               }}
+              
               image={{
                 src: checkOpen(marker.time) ? "../img/start1.png" : "../img/end1.png",
                 size: {
@@ -245,8 +269,15 @@ function KakaoMap() {
             />
           ))
         }
+        {showModal && <HospitalModal hospitalInfo={hospitalInfo} onClose={closeModal} />}
       </Map>
     </>
   );
+
+  function closeModal() {
+    setShowModal(false);
+    setHospitalInfo(null);
+  }
+
 }
 export default KakaoMap;
