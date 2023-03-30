@@ -12,13 +12,13 @@
   margin: 0 auto;
 }
 
-.bg .log01 {
+.bg .id {
   display: flex;
   align-items: left;
   margin-bottom: 0;
   margin-left: 35%;
 }
-.bg .phonenum{
+.bg .phonenum {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,15 +26,18 @@
   width: 30%;
   height: 25px;
   border: 1px;
+}
+.bg .phonenum:focus {
+  outline: none;
 }
 
-.bg .log02 {
+.bg .pw {
   display: flex;
   align-items: left;
   margin-bottom: 0;
   margin-left: 35%;
 }
-.bg .resinum{
+.bg .resinum {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,6 +45,9 @@
   width: 30%;
   height: 25px;
   border: 1px;
+}
+.bg .resinum:focus {
+  outline: none;
 }
 
 .bg .logbtn{
@@ -55,4 +61,8 @@
   border: 1px;
   font-size: 14px;
   font-weight: bold;
+}
+
+input::placeholder {
+  color: lightgray;
 }
