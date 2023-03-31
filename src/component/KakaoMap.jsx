@@ -72,7 +72,7 @@ function KakaoMap() {
   
   // 전체병원
   const ShowMarkersAll = () => {
-    axios.get('tukdoctor.shop/api/hospitals/categories/all')
+    axios.get('https://tukdoctor.shop/api/hospitals/categories/all')
       .then(response => {
         const markers = response.data.map(marker => {
           const isOpen = checkOpen(marker.time);
@@ -247,7 +247,7 @@ function KakaoMap() {
               title={marker.name}
               onClick={() => {
                 const selectedName = marker.name;
-                axios.get('https://tukdoctor.shop/api/hospitals/categories/findName', { params: { hospital_name: selectedName } })
+                axios.get('http://localhost:5001/api/hospitals/categories/findName', { params: { hospital_name: selectedName } })
                   .then(response => {
                     setHospitalInfo(response.data);
                     // console.log(hospitalInfo);

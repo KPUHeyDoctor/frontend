@@ -11,7 +11,7 @@ function MemLog() {
 
   const loginClick = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:5001/', { phoneNum, rrNum })
+    axios.post('http://localhost:5001/login/member', { phoneNum, rrNum })
       .then((response) => {
         console.log(response.data);
       })
