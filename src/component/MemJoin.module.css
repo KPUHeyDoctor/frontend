@@ -12,3 +12,77 @@
   justify-content: center;
   margin: 0 auto;
 }
+
+.bg .name {
+  display: flex;
+  align-items: left;
+  margin-bottom: 0;
+  margin-left: 35%;
+}
+.bg .username {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 35%;
+  width: 30%;
+  height: 30px;
+  border: 1px;
+}
+.bg .username:focus {
+  outline: none;
+}
+
+.bg .id {
+  display: flex;
+  align-items: left;
+  margin-bottom: 0;
+  margin-left: 35%;
+}
+.bg .phonenum {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 35%;
+  width: 30%;
+  height: 30px;
+  border: 1px;
+}
+.bg .phonenum:focus {
+  outline: none;
+}
+
+.bg .pw {
+  display: flex;
+  align-items: left;
+  margin-bottom: 0;
+  margin-left: 35%;
+}
+.bg .resinum {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 35%;
+  width: 30%;
+  height: 30px;
+  border: 1px;
+}
+.bg .resinum:focus {
+  outline: none;
+}
+
+.bg .joinbtn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 40px;
+  width: 100px;
+  height: 25px;
+  border: 1px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+input::placeholder {
+  color: lightgray;
+}
