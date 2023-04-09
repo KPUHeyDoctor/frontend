@@ -214,7 +214,7 @@ function KakaoMap() {
     <>
       <div className={styles.hoslist}>
         <div className={styles.btns}>
-          <button className={'&{styles.btn} &{styles.btn01}'} onClick={ShowMarkersAll}>전체병원</button>
+          <button className={'&{styles.btn} &{styles.btn01}'} onClick={ShowMarkersAll}>전체병원2</button>
           <button className={'&{styles.btn} &{styles.btn02}'} onClick={ShowMarkersNae}>내과</button>
           <button className={'&{styles.btn} &{styles.btn03}'} onClick={ShowMarkersEbin}>이비인후과</button>
           <button className={'&{styles.btn} &{styles.btn04}'} onClick={ShowMarkersKids}>소아과</button>
