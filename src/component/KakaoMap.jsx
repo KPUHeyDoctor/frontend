@@ -120,7 +120,7 @@ function KakaoMap() {
   
   //이비인후과
   const ShowMarkersEbin = () => {
-    axios.get('http://localhost:5001/api/hospitals/categories/ebin')
+    axios.get('https://tukdoctor.shop/api/hospitals/categories/ebin')
       .then(response => {
         const markers = response.data.map(marker => {
           const isOpen = checkOpen(marker.time);
@@ -144,7 +144,7 @@ function KakaoMap() {
   
   //소아과
   const ShowMarkersKids = () => {
-    axios.get('http://localhost:5001/api/hospitals/categories/kids')
+    axios.get('https://tukdoctor.shop/api/hospitals/categories/kids')
       .then(response => {
         const markers = response.data.map(marker => {
           const isOpen = checkOpen(marker.time);
@@ -168,7 +168,7 @@ function KakaoMap() {
   
   //정형외과
   const ShowMarkersBone = () => {
-    axios.get('http://localhost:5001/api/hospitals/categories/bone')
+    axios.get('https://tukdoctor.shop/api/hospitals/categories/bone')
       .then(response => {
         const markers = response.data.map(marker => {
           const isOpen = checkOpen(marker.time);
@@ -247,7 +247,7 @@ function KakaoMap() {
               title={marker.name}
               onClick={() => {
                 const selectedName = marker.name;
-                axios.get('http://localhost:5001/api/hospitals/categories/findName', { params: { hospital_name: selectedName } })
+                axios.get('https://tukdoctor.shop/api/hospitals/categories/findName', { params: { hospital_name: selectedName } })
                   .then(response => {
                     setHospitalInfo(response.data);
                     // console.log(hospitalInfo);
