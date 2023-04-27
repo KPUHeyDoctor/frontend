@@ -13,7 +13,7 @@ function MemJoin() {
 
   const joinClick = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:5001/join/member', { userName, phoneNum, rrNum })
+    axios.post('https://tukdoctor.shop/join/member', { userName, phoneNum, rrNum })
       .then((response) => {
         console.log(response.data);
       })
@@ -68,7 +68,7 @@ function MemJoin() {
     <input
       type="pw"
       id="pw"
-      className={styles.resinum}
+      className={styles.rrnum}
       onFocus={() => {
         setPw(true);
       }}

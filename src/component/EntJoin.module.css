@@ -5,10 +5,83 @@
   margin: 0 auto;
   background-color: #F8FBFB;
 }
-
 .bg .join {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+}
+
+.bg .name {
+  display: flex;
+  align-items: left;
+  margin-bottom: 0;
+  margin-left: 35%;
+}
+.bg .hosname {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 35%;
+  width: 30%;
+  height: 25px;
+  border: 1px;
+}
+.bg .hosname:focus {
+  outline: none;
+}
+
+.bg .id {
+  display: flex;
+  align-items: left;
+  margin-bottom: 0;
+  margin-left: 35%;
+}
+.bg .hosid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 35%;
+  width: 30%;
+  height: 25px;
+  border: 1px;
+}
+.bg .hosid:focus {
+  outline: none;
+}
+
+.bg .pw {
+  display: flex;
+  align-items: left;
+  margin-bottom: 0;
+  margin-left: 35%;
+}
+.bg .hospw {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 35%;
+  width: 30%;
+  height: 25px;
+  border: 1px;
+}
+.bg .hospw:focus {
+  outline: none;
+}
+
+.bg .joinbtn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 40px;
+  width: 100px;
+  height: 25px;
+  border: 1px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+input::placeholder {
+  color: lightgray;
 }

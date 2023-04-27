@@ -11,7 +11,7 @@ function MemLog() {
 
   const loginClick = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:5001/login/member', { phoneNum, rrNum })
+    axios.post('https://tukdoctor.shop/login/member', { phoneNum, rrNum })
       .then((response) => {
         console.log(response.data);
       })
@@ -48,7 +48,7 @@ function MemLog() {
       <input
         type="pw"
         id="pw"
-        className={styles.resinum}
+        className={styles.rrnum}
         onFocus={() => {
           setPw(true);
         }}

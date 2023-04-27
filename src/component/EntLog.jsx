@@ -4,14 +4,14 @@ import styles from '../component/EntLog.module.css';
 import login from '../img/login.png';
 
 function EntLog() {
-  const [phoneNum, setPhoneNum] = useState('');
-  const [rrNum, setRrNum] = useState('');
+  const [hospitalId, setHospitalId] = useState('');
+  const [hospitalPw, setHospitalPw] = useState('');
   const [id, setId] = useState(false);
   const [pw, setPw] = useState(false);
 
   const loginClick = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:5001/login/enterprise', { phoneNum, rrNum })
+    axios.post('https://tukdoctor.shop/login/enterprise', { hospitalId, hospitalPw })
       .then((response) => {
         console.log(response.data);
       })
@@ -26,39 +26,39 @@ function EntLog() {
         <img src={login} alt="로그인">
         </img>
       </div>
-      <h4 htmlFor="phonenum" className={styles.id}>전화번호</h4>
+      <h4 htmlFor="hosid" className={styles.id}>병원아이디</h4>
       <input
         type="id"
         id="id"
-        className={styles.phonenum}
+        className={styles.hosid}
         onFocus={() => {
           setId(true);
         }}
         onBlur={() => {
           setId(false);
         }}
-        placeholder={id === true ? "" : "010-1234-5678"}
-        value={phoneNum}
+        placeholder={id === true ? "" : "heydoctor"}
+        value={hospitalId}
         onChange={(e) => {
-          setPhoneNum(e.target.value);
+          setHospitalId(e.target.value);
         }}
       />
 
-      <h4 htmlFor="rrnum" className={styles.pw}>주민등록번호</h4>
+      <h4 htmlFor="hospw" className={styles.pw}>병원비밀번호</h4>
       <input
         type="pw"
         id="pw"
-        className={styles.resinum}
+        className={styles.hospw}
         onFocus={() => {
           setPw(true);
         }}
         onBlur={() => {
           setPw(false);
         }}
-        placeholder={pw === true ? "" : "000000-0000000"}
-        value={rrNum}
+        placeholder={pw === true ? "" : "password"}
+        value={hospitalPw}
         onChange={(e) => {
-          setRrNum(e.target.value);
+          setHospitalPw(e.target.value);
         }}
       />
       <button className={styles.logbtn} onClick={loginClick}>LOGIN</button>

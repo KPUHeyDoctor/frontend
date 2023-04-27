@@ -1,7 +1,7 @@
 import Header from '../component/Header';
 import Resertime from '../component/Resertime';
 
-function Reser03() {
+function ReserTime() {
   return(
     <div>
       <Header />
@@ -10,4 +10,4 @@ function Reser03() {
   );
 }
 
-export default Reser03;
+export default ReserTime;

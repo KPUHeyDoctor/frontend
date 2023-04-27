@@ -18,7 +18,7 @@
   margin-bottom: 0;
   margin-left: 35%;
 }
-.bg .phonenum {
+.bg .hosid {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,7 +27,7 @@
   height: 25px;
   border: 1px;
 }
-.bg .phonenum:focus {
+.bg .hosid:focus {
   outline: none;
 }
 
@@ -37,7 +37,7 @@
   margin-bottom: 0;
   margin-left: 35%;
 }
-.bg .resinum {
+.bg .hospw {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,7 +46,7 @@
   height: 25px;
   border: 1px;
 }
-.bg .resinum:focus {
+.bg .hospw:focus {
   outline: none;
 }
 

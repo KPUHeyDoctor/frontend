@@ -7,7 +7,6 @@ import EnterLogin from './page/EnterLogin.jsx';
 import MemberJoin from './page/MemberJoin.jsx';
 import EnterJoin from './page/EnterJoin.jsx';
 import ReserDoc from './page/ReserDoc.jsx';
-import ReserDate from './page/ReserDate.jsx';
 import ReserTime from './page/ReserTime.jsx';
 import MyPage from './page/MyPage.jsx';
 
@@ -24,8 +23,7 @@ function App() {
         <Route path="/memjoin" element={<MemberJoin />}/>
         <Route path="/entjoin" element={<EnterJoin />}/>
         <Route path="/reser" element={<ReserDoc />}/>
-        <Route path="/date" element={<ReserDate />}/>
-        <Route path="/time" element={<ReserTime />}/>
+        <Route path="/date" element={<ReserTime />}/>
         <Route path="/mypage" element={<MyPage />}/>
       </Routes>
     </BrowserRouter>

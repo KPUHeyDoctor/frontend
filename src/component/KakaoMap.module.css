@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   width: 90%;
-  height: 810px;
+  height: 900px;
   margin: 0 auto;
 }
 
@@ -17,8 +17,14 @@
   height: 90px;
 }
 
+@font-face {
+  font-family: 'NotoSerif';
+  src: url('../font/NotoSerif-Bold.ttf');
+}
+
 .btns button {
   background-color: transparent;
+  font-family: 'NotoSerif';
   font-size: 20px;
   font-weight: 500px;
   color: rgb(100, 100, 100);
@@ -28,6 +34,7 @@
 
 .btns button:focus {
   background-color: transparent;
+  font-family: 'NotoSerif';
   font-size: 22px;
   font-weight: 550;
   color: black;
@@ -46,3 +53,40 @@
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
+.modal .modalcontent .close {
+  font-size: 20px;
+  background-color: transparent;
+  border: none;
+  color: black;
+}
+
+.modal .modalcontent .modalname {
+  display: flex;
+  align-items: center;
+}
+
+/* .modal .modalcontent .modalname .modal1 {
+  margin: 5px;
+  width: 20px;
+  height: 20px;
+} */
+
+.modal .modalcontent .modaladdr {
+  display: flex;
+  align-items: center;
+}
+.modal .modalcontent .modaladdr .modal2 {
+  margin: 5px;
+
+}
+
+.modal .modalcontent .modalphone {
+  display: flex;
+  align-items: center;
+}
+.modal .modalcontent .modalphone .modal3 {
+  margin: 5px;
+
+}
+

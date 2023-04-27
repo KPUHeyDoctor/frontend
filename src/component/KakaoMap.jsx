@@ -2,6 +2,9 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from '../component/KakaoMap.module.css';
+// import modalhospital from '../img/modalhospital.png';
+import modallocation from '../img/modallocation.png';
+import modalphone from '../img/modalphone.png';
 
 function KakaoMap() {
   const [state, setState] = useState({
@@ -200,11 +203,24 @@ function KakaoMap() {
     return (
       <div className={styles.modal}>
         <div className={styles.modalcontent}>
-          <button onClick={onClose}>Close</button>
-          <h1>{hospitalInfo[0].BIZPLC_NM}</h1>
-          <p>{hospitalInfo[0].REFINE_ROADNM_ADDR}</p>
-          <p>{hospitalInfo[0].LOCPLC_FACLT_TELNO_DTLS}</p>
-          <button>예약</button>
+          <button className={styles.close} onClick={onClose}>X</button>
+
+          <span className={styles.modalname}>
+            {/* <img src={modalhospital} alt="" className={styles.modal1}/> */}
+            <h1>{hospitalInfo[0].BIZPLC_NM}</h1>
+          </span>
+
+          <span className={styles.modaladdr}>
+            <img src={modallocation} alt="" className={styles.modal2}/>
+            <p>{hospitalInfo[0].REFINE_ROADNM_ADDR}</p>
+          </span>
+
+          <span className={styles.modalphone}>
+            <img src={modalphone} alt="" className={styles.modal3}/>
+            <p>{hospitalInfo[0].LOCPLC_FACLT_TELNO_DTLS}</p>
+          </span>
+
+          {/* <button className={styles.reserbtn}>예약하기</button> */}
         </div>
       </div>
     );

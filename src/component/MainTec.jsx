@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import styles from '../component/MainTec.module.css';
-import chatimg from '../img/chat.png';
-import myreser from '../img/myreser.png';
+import tec1 from '../img/tec1.png';
+import tec2 from '../img/tec2.png';
+import tec3 from '../img/tec3.png';
 
 function MainTec() {
   // const url = "http://pf.kakao.com/_xoxlxdrxj"
@@ -15,22 +16,25 @@ function MainTec() {
   }
 
   return (
+    <>
     <div className={styles.tec}>
-      <button onClick ={()=>{window.open(url)}}
-      className={styles.chat}>
-        <img src={chatimg} alt="챗봇바로가기"></img>
-      </button>
-      <Link to="/reser">
-        <button className={styles.myreser}>
-          <img src={myreser} alt="내예약내역"></img>
-        </button>
-      </Link>
-      <button 
-      onClick={handleClick}
-      className={styles.map}>
-        <img src={myreser} alt="내에약내역"></img>
-      </button>
+      <div className={styles.tec1}>
+        <img src={tec1} alt="챗봇바로가기" ></img>
+        <button className={styles.tec1_1} onClick ={()=>{window.open(url)}} >바로가기</button>
+      </div>
+
+      <div className={styles.tec2}>
+        <img src={tec2} alt="챗봇바로가기"></img>
+        <button className={styles.tec2_1}>바로가기</button>
+      </div>
+
+      <div className={styles.tec3}>
+        <img src={tec3} alt="챗봇바로가기"></img>
+        <button className={styles.tec3_1} onClick={handleClick} >바로가기</button>
+      </div>
     </div>
+    
+    </>
   );
 }
 
