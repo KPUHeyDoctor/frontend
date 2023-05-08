@@ -95,8 +95,6 @@ function KakaoMap() {
         }));
       })
       .catch(error => console.log(error));
-
-      window.history.pushState(null, '', '/all');
   };
   
   // 내과
@@ -121,8 +119,6 @@ function KakaoMap() {
         }));
       })
       .catch(error => console.log(error));
-
-      window.history.pushState(null, '', '/nae');
   };
   
   //이비인후과
@@ -147,8 +143,6 @@ function KakaoMap() {
         }));
       })
       .catch(error => console.log(error));
-
-      window.history.pushState(null, '', '/ebin');
   };
   
   //소아과
@@ -173,8 +167,6 @@ function KakaoMap() {
         }));
       })
       .catch(error => console.log(error));
-
-      window.history.pushState(null, '', '/kids');
   };
   
   //정형외과
@@ -199,8 +191,43 @@ function KakaoMap() {
         }));
       })
       .catch(error => console.log(error));
+  };
 
-      window.history.pushState(null, '', '/bone');
+  const handleButtonClick = (id) => {
+    let url = '';
+    switch (id) {
+      case 'all':
+        url = 'all';
+        ShowMarkersAll();
+        break;
+      case 'nae':
+        url = 'nae';
+        ShowMarkersNae();
+        break;
+      case 'ebin':
+        url = 'ebin';
+        ShowMarkersEbin();
+        break;
+      case 'kids':
+        url = 'kids';
+        ShowMarkersKids();
+        break;
+      case 'bone':
+        url = 'bone';
+        ShowMarkersBone();
+        break;
+      default:
+        url = '/';
+        break;
+    }
+    window.history.pushState({}, '', url);
+  };
+
+  window.onclick = (event) => {
+    const target = event.target;
+    if (target.tagName !== 'BUTTON') {
+      window.history.pushState({}, '', '/');
+    }
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -240,11 +267,11 @@ function KakaoMap() {
     <>
       <div className={styles.hoslist}>
         <div className={styles.btns}>
-          <button className={'&{styles.btn} &{styles.btn01}'} onClick={ShowMarkersAll}>전체병원</button>
-          <button className={'&{styles.btn} &{styles.btn02}'} onClick={ShowMarkersNae}>내과</button>
-          <button className={'&{styles.btn} &{styles.btn03}'} onClick={ShowMarkersEbin}>이비인후과</button>
-          <button className={'&{styles.btn} &{styles.btn04}'} onClick={ShowMarkersKids}>소아과</button>
-          <button className={'&{styles.btn} &{styles.btn05}'} onClick={ShowMarkersBone}>정형외과</button>
+          <button id='all' className={'&{styles.btn} &{styles.btn01}'} onClick={() => handleButtonClick('all')}>전체병원</button>
+          <button id='nae' className={'&{styles.btn} &{styles.btn02}'} onClick={() => handleButtonClick('nae')}>내과</button>
+          <button id='ebin' className={'&{styles.btn} &{styles.btn03}'} onClick={() => handleButtonClick('ebin')}>이비인후과</button>
+          <button id='kids' className={'&{styles.btn} &{styles.btn04}'} onClick={() => handleButtonClick('kids')}>소아과</button>
+          <button id='bone' className={'&{styles.btn} &{styles.btn05}'} onClick={() => handleButtonClick('bone')}>정형외과</button>
         </div>
       </div>
       <Map // 지도를 표시할 Container
