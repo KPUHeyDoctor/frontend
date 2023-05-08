@@ -13,7 +13,7 @@ function MemJoin() {
 
   const joinClick = (event) => {
     event.preventDefault();
-    axios.post('https://tukdoctor.shop/join/member', { userName, phoneNum, rrNum })
+    axios.post('https://localhost:3000/join/member', { userName, phoneNum, rrNum })
       .then((response) => {
         console.log(response.data);
       })

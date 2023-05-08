@@ -11,7 +11,7 @@ function MemLog() {
 
   const loginClick = (event) => {
     event.preventDefault();
-    axios.post('https://tukdoctor.shop/login/member', { phoneNum, rrNum })
+    axios.post('https://localhost:3000/login/member', { phoneNum, rrNum })
       .then((response) => {
         console.log(response.data);
       })

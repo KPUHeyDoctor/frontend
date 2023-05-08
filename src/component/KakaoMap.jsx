@@ -95,6 +95,8 @@ function KakaoMap() {
         }));
       })
       .catch(error => console.log(error));
+
+      window.history.pushState(null, '', '/all');
   };
   
   // 내과
@@ -119,6 +121,8 @@ function KakaoMap() {
         }));
       })
       .catch(error => console.log(error));
+
+      window.history.pushState(null, '', '/nae');
   };
   
   //이비인후과
@@ -143,6 +147,8 @@ function KakaoMap() {
         }));
       })
       .catch(error => console.log(error));
+
+      window.history.pushState(null, '', '/ebin');
   };
   
   //소아과
@@ -167,6 +173,8 @@ function KakaoMap() {
         }));
       })
       .catch(error => console.log(error));
+
+      window.history.pushState(null, '', '/kids');
   };
   
   //정형외과
@@ -191,6 +199,8 @@ function KakaoMap() {
         }));
       })
       .catch(error => console.log(error));
+
+      window.history.pushState(null, '', '/bone');
   };
 
   const [showModal, setShowModal] = useState(false);
