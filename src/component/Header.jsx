@@ -10,7 +10,7 @@ function Header() {
   const [phoneNum, setPhoneNum] = useState('');
 
   const handleLogout = () => {
-    axios.post('/logout', { phoneNum: phoneNum })
+    axios.post('https://tukdoctor.shop/logout', { phoneNum: phoneNum })
       .then((res) => {
         setIsLoggedIn(false);
         setUserName('');

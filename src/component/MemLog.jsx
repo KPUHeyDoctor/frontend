@@ -9,7 +9,7 @@ function MemLog() {
 
   const handleLogin = (event) => {
     event.preventDefault();
-    axios.post('https://tukdoctor.shop//login/member', { phoneNum, rrNum })
+    axios.post('https://tukdoctor.shop/login/member', { phoneNum, rrNum })
       .then((response) => {
         if (response.data.message === 'Login successful!') {
           console.log('로그인 성공');

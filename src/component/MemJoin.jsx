@@ -19,7 +19,7 @@ function MemJoin() {
       return;
     }
 
-    axios.post('https://localhost:3000/join/member', { userName, phoneNum, rrNum })
+    axios.post('https://tukdoctor.shop/join/member', { userName, phoneNum, rrNum })
       .then((response) => {
         console.log(response.data);
         if(response.data.message ==='ok') {
