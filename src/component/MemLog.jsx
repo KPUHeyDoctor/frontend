@@ -6,18 +6,55 @@ import login from '../img/login.png';
 function MemLog() {
   const [phoneNum, setPhoneNum] = useState('');
   const [rrNum, setRrNum] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [id, setId] = useState(false);
   const [pw, setPw] = useState(false);
 
-  const loginClick = (event) => {
+  const handleLogin = (event) => {
     event.preventDefault();
-    axios.post('https://localhost:3000/login/member', { phoneNum, rrNum })
+    axios.post('https://tukdoctor.shop//login/member', { phoneNum, rrNum })
       .then((response) => {
-        console.log(response.data);
+        if (response.data.message === 'Login successful!') {
+          console.log('로그인 성공');
+          // save token to local storage
+          localStorage.setItem('token', response.data.token);
+          // set logged in state to true
+          setIsLoggedIn(true);
+          // redirect to logged in page
+          window.location.replace('/loggedin');
+        } else if (response.data.message === 'Invalid credentials!') {
+          console.log('로그인 실패');
+        }
       })
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  const handleLogout = () => {
+    axios.post('https://tukdoctor.shop/logout', { phoneNum })
+      .then((response) => {
+        if (response.data.message === 'Logout successful!') {
+          console.log('로그아웃 성공');
+          // clear token from local storage
+          localStorage.removeItem('token');
+          // set logged in state to false
+          setIsLoggedIn(false);
+          // redirect to login page
+          window.location.replace('/memlog');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  if (isLoggedIn) {
+    return (
+      <div>
+        <button onClick={handleLogout}>Logout</button>
+      </div>
+    );
   }
 
   return (
@@ -61,7 +98,8 @@ function MemLog() {
           setRrNum(e.target.value);
         }}
       />
-      <button className={styles.logbtn} onClick={loginClick}>LOGIN</button>
+      <button className={styles.logbtn} onClick={handleLogin}>LOGIN</button>
+      <button className={styles.logoutbtn} onClick={handleLogout}>LOGOUT</button>
     </div>
   );
 }

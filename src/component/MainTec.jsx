@@ -31,6 +31,13 @@ function MainTec() {
       <div className={styles.tec3}>
         <img src={tec3} alt="챗봇바로가기"></img>
         <button className={styles.tec3_1} onClick={handleClick} >바로가기</button>
+        <div>
+          <button>전체병원</button>
+          <button>내과</button>
+          <button>이비인후과</button>
+          <button>소아과</button>
+          <button>정형외과</button>
+        </div>
       </div>
     </div>
     

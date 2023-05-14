@@ -13,9 +13,21 @@ function MemJoin() {
 
   const joinClick = (event) => {
     event.preventDefault();
+
+    if(!userName || !phoneNum || !rrNum) {
+      alert('모든 정보를 입력해주세요.');
+      return;
+    }
+
     axios.post('https://localhost:3000/join/member', { userName, phoneNum, rrNum })
       .then((response) => {
         console.log(response.data);
+        if(response.data.message ==='ok') {
+          alert('회원가입이 완료되었습니다.');
+          window.location.replace('/memlog')
+        } else {
+          alert('회원가입에 실패했습니다. 다시 시도해주세요.');
+        }
       })
       .catch((error) => {
         console.log(error);
