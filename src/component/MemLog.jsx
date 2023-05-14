@@ -6,9 +6,6 @@ import login from '../img/login.png';
 function MemLog() {
   const [phoneNum, setPhoneNum] = useState('');
   const [rrNum, setRrNum] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [id, setId] = useState(false);
-  const [pw, setPw] = useState(false);
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -19,9 +16,8 @@ function MemLog() {
           // save token to local storage
           localStorage.setItem('token', response.data.token);
           // set logged in state to true
-          setIsLoggedIn(true);
           // redirect to logged in page
-          window.location.replace('/loggedin');
+          window.location.replace('/');
         } else if (response.data.message === 'Invalid credentials!') {
           console.log('로그인 실패');
         }
@@ -31,50 +27,26 @@ function MemLog() {
       });
   }
 
-  const handleLogout = () => {
-    axios.post('https://tukdoctor.shop/logout', { phoneNum })
-      .then((response) => {
-        if (response.data.message === 'Logout successful!') {
-          console.log('로그아웃 성공');
-          // clear token from local storage
-          localStorage.removeItem('token');
-          // set logged in state to false
-          setIsLoggedIn(false);
-          // redirect to login page
-          window.location.replace('/memlog');
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  if (isLoggedIn) {
-    return (
-      <div>
-        <button onClick={handleLogout}>Logout</button>
-      </div>
-    );
-  }
+  const [idFocused, setIdFocused] = useState(false);
+  const [pwFocused, setPwFocused] = useState(false);
 
   return (
     <div className={styles.bg}>
       <div className={styles.log}>
-        <img src={login} alt="로그인">
-        </img>
+        <img src={login} alt="로그인" />
       </div>
       <h4 htmlFor="phonenum" className={styles.id}>전화번호</h4>
       <input
-        type="id"
-        id="id"
+        type="text"
+        id="phonenum"
         className={styles.phonenum}
         onFocus={() => {
-          setId(true);
+          setIdFocused(true);
         }}
         onBlur={() => {
-          setId(false);
+          setIdFocused(false);
         }}
-        placeholder={id === true ? "" : "010-1234-5678"}
+        placeholder={idFocused ? "" : "010-1234-5678"}
         value={phoneNum}
         onChange={(e) => {
           setPhoneNum(e.target.value);
@@ -83,23 +55,23 @@ function MemLog() {
 
       <h4 htmlFor="rrnum" className={styles.pw}>주민등록번호</h4>
       <input
-        type="pw"
-        id="pw"
+        type="password"
+        id="rrnum"
         className={styles.rrnum}
         onFocus={() => {
-          setPw(true);
+          setPwFocused(true);
         }}
         onBlur={() => {
-          setPw(false);
+          setPwFocused(false);
         }}
-        placeholder={pw === true ? "" : "000000-0000000"}
+        placeholder={pwFocused ? "" : "000000-0000000"}
         value={rrNum}
         onChange={(e) => {
           setRrNum(e.target.value);
         }}
       />
+      
       <button className={styles.logbtn} onClick={handleLogin}>LOGIN</button>
-      <button className={styles.logoutbtn} onClick={handleLogout}>LOGOUT</button>
     </div>
   );
 }
