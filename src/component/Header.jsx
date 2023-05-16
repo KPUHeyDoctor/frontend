@@ -10,7 +10,7 @@ function Header() {
   const [phoneNum, setPhoneNum] = useState('');
 
   const handleLogout = () => {
-    axios.post('https://tukdoctor.shop/logout', { phoneNum: phoneNum })
+    axios.post('https://tukdoctor.shop/api/logout', { phoneNum: phoneNum })
       .then((res) => {
         setIsLoggedIn(false);
         setUserName('');
@@ -22,18 +22,22 @@ function Header() {
   };
 
   useEffect(() => {
-    axios.get('/protected')
-      .then((res) => {
-        if (res.data && res.data.phoneNum) {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://tukdoctor.shop/api/protected');
+        if (response.data && response.data.phoneNum) {
           setIsLoggedIn(true);
-          setUserName(res.data.userName);
+          setUserName(response.data.userName);
         }
-      })
-      .catch((err) => {
+      } catch (err) {
         setIsLoggedIn(false);
         setUserName('');
-      });
+      }
+    };
+
+    fetchData();
   }, []);
+    
 
   return (
     <>
