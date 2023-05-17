@@ -1,4 +1,4 @@
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from '../component/MainTec.module.css';
 import tec1 from '../img/tec1.png';
 import tec2 from '../img/tec2.png';
@@ -32,11 +32,21 @@ function MainTec() {
         <img src={tec3} alt="챗봇바로가기"></img>
         <button className={styles.tec3_1} onClick={handleClick} >바로가기</button>
         <div>
-          <button>전체병원</button>
-          <button>내과</button>
-          <button>이비인후과</button>
-          <button>소아과</button>
-          <button>정형외과</button>
+          <button>
+            <Link to="/categories/all">전체병원</Link>
+          </button>
+          <button>
+            <Link to="/categories/nae">내과</Link>
+          </button>
+          <button>
+            <Link to="/categories/ebin">이비인후과</Link>
+          </button>
+          <button>
+            <Link to="/categories/kids">소아과</Link>
+          </button>
+          <button>
+            <Link to="/categories/bone">정형외과</Link>
+          </button>
         </div>
       </div>
     </div>

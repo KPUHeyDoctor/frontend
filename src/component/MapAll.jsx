@@ -5,7 +5,6 @@ import styles from '../component/KakaoMap.module.css';
 // import modalhospital from '../img/modalhospital.png';
 import modallocation from '../img/modallocation.png';
 import modalphone from '../img/modalphone.png';
-import { useNavigate } from 'react-router-dom';
 
 function KakaoMap() {
   const [state, setState] = useState({
@@ -76,7 +75,6 @@ function KakaoMap() {
   
   // 전체병원
   const ShowMarkersAll = () => {
-    const navigate = useNavigate();
   
     axios
       .get('https://tukdoctor.shop/api/hospitals/categories/all')
@@ -97,8 +95,6 @@ function KakaoMap() {
           showMarkers: true,
           markers: markers,
         }));
-
-        navigate('/categories/all'); // URL 변경
       })
       .catch(error => console.log(error));
   };
