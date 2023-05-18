@@ -24,7 +24,13 @@ function MemJoin() {
   
   const joinClick = async () => {
     try {
-      const response = await axios.post('https://tukdoctor.shop/api/join/member', member);
+      const formattedMember = {
+        ...member,
+        phoneNum: member.phoneNum.replace(/-/g, ''),
+        rrNum: member.rrNum.replace(/-/g, '')
+      };
+
+      const response = await axios.post('https://tukdoctor.shop/api/join/member', formattedMember);
       console.log(response.data);
       if (response.data.message === 'ok') {
         alert('회원가입이 완료되었습니다.');

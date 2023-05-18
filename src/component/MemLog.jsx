@@ -16,7 +16,13 @@ function MemLog() {
 
   const loginClick = async () => {
     try {
-      const res = await axios.post('https://tukdoctor.shop/api/login/member', member);
+      const formattedMember = {
+        ...member,
+        phoneNum: member.phoneNum.replace(/-/g, ''),
+        rrNum: member.rrNum.replace(/-/g, '')
+      };
+
+      const res = await axios.post('https://tukdoctor.shop/api/login/member', formattedMember);
       console.log(res.data);
       if (res.data.message === 'Login successful!') {
         console.log('로그인 성공');
