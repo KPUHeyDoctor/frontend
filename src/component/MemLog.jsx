@@ -41,7 +41,7 @@ function MemLog() {
         <img src={login} alt="로그인"></img>
       </div>
 
-      <form onSubmit={handleSubmit} />
+      <form onSubmit={handleSubmit}>
         <h4 htmlFor="phonenum" className={styles.id}>전화번호</h4>
         <input
           type='tel'
@@ -50,8 +50,8 @@ function MemLog() {
           value={member.phoneNum}
           required
           placeholder='010-0000-0000'
-          onFocus={() => {
-            setMember({...member, phoneNum: '' });
+          onChange={(e) => {
+            setMember({...member, phoneNum: e.target.value});
           }}
         />
 
@@ -63,10 +63,11 @@ function MemLog() {
           value={member.rrNum}
           required
           placeholder='000000-0000000'
-          onFocus={() => {
-            setMember({...member, rrNum: '' });
+          onChange={(e) => {
+            setMember({...member, rrNum: e.target.value});
           }}
         />
+      </form>
       <button className={styles.logbtn} onClick={loginClick}>LOGIN</button>
     </div>
   );
