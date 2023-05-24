@@ -11,6 +11,19 @@ function MemJoin() {
     rrNum: '',
   });
 
+  const [isPhoneNumValid, setIsPhoneNumValid] = useState(false);
+  const [isRrNumValid, setIsRrNumValid] = useState(false);
+
+  const checkPhoneNum = () => {
+    const inValid = member.phoneNum === member.phoneNumToCheck;
+    setIsPhoneNumValid(inValid);
+  };
+
+  const checkRrNum = () => {
+    const inValid = member.rrNum === member.rrNumToCheck;
+    setIsRrNumValid(inValid);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     for (let key in member) {
@@ -19,7 +32,17 @@ function MemJoin() {
         return;
       }
     }
-    await joinClick();
+    
+    if (isPhoneNumValid && isRrNumValid) {
+      joinClick();
+    } else {
+      if (!isPhoneNumValid) {
+        alert('전화번호를 확인해주세요.');
+      }
+      if (!isRrNumValid) {
+        alert('주민등록번호를 확인해주세요.')
+      }
+    }
   };
   
   const joinClick = async () => {
@@ -50,7 +73,7 @@ function MemJoin() {
       <img src={join} alt="회원가입"></img>
     </div>
 
-    <form onSubmit={handleSubmit} />
+    <form onSubmit={handleSubmit}>
       <h4 htmlFor="username" className={styles.name}>이름</h4>
       <input 
         type="name"
@@ -77,6 +100,20 @@ function MemJoin() {
         }}
       />
 
+      <h4 htmlFor="phonenum" className={styles.id}>전화번호 확인</h4>
+      <input
+        type='tel'
+        id='phonenum'
+        className={styles.phonenum}
+        required
+        placeholder='동일한 전화번호를 입력해주세요.'
+        onChange={(e) => {
+          setMember({...member, phoneNumToCheck: e.target.value})
+          setIsPhoneNumValid(false);
+        }}
+        onBlur={checkPhoneNum}
+      />
+
       <h4 htmlFor="rrnum" className={styles.pw}>주민등록번호</h4>
       <input 
         type="tel"
@@ -89,6 +126,21 @@ function MemJoin() {
           setMember({...member, rrNum: e.target.value});
         }}
       />
+
+      <h4 htmlFor="rrnum" className={styles.pw}>주민등록번호 확인</h4>
+      <input 
+        type="tel"
+        id="rrnum"
+        className={styles.rrnum}
+        required
+        placeholder='동일한 주민등록번호를 입력해주세요.'
+        onChange={(e) => {
+          setMember({...member, rrNumToCheck: e.target.value});
+          setIsRrNumValid(false);
+        }}
+        onBlur={checkRrNum}
+      />
+    </form>
       
     <button type="submit" className={styles.joinbtn} onClick={joinClick}>JOIN</button>
   </div>
