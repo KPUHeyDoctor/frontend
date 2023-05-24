@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LogoImg from '../img/heydoctor.png';
 import styles from '../component/Header.module.css';
@@ -15,28 +15,30 @@ function Header() {
         setIsLoggedIn(false);
         setUserName('');
         setPhoneNum('');
+        console.log('Logout successful!');
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('https://tukdoctor.shop/api/protected');
-        if (response.data && response.data.phoneNum) {
-          setIsLoggedIn(true);
-          setUserName(response.data.userName);
-        }
-      } catch (err) {
-        setIsLoggedIn(false);
-        setUserName('');
-      }
-    };
+  // 인가
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get('https://tukdoctor.shop/api/protected');
+  //       if (response.data && response.data.phoneNum) {
+  //         setIsLoggedIn(true);
+  //         setUserName(response.data.userName);
+  //       }
+  //     } catch (err) {
+  //       setIsLoggedIn(false);
+  //       setUserName('');
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
     
 
   return (

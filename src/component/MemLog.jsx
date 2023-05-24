@@ -23,9 +23,9 @@ function MemLog() {
       };
 
       const res = await axios.post('https://tukdoctor.shop/api/login/member', formattedMember);
-      console.log(res.data);
-      if (res.data.message === 'Login successful!') {
-        console.log('로그인 성공');
+
+      if (res.data.userName) {
+        console.log(res.data.userName);
 
         //save token to local storage
         localStorage.setItem('token', res.data.token);

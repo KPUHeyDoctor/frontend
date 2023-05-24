@@ -61,6 +61,7 @@
   border: 1px;
   font-size: 14px;
   font-weight: bold;
+  cursor: pointer;
 }
 .bg .logoutbtn{
   display: flex;
