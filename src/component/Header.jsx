@@ -37,7 +37,7 @@ function Header() {
     };
 
     fetchData();
-  }, []);
+  }, [isLoggedIn, userName]);
 
   return (
     <>
