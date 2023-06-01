@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LogoImg from '../img/heydoctor.png';
 import styles from '../component/Header.module.css';
@@ -21,23 +21,6 @@ function Header() {
         console.log(err);
       });
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('https://tukdoctor.shop/api/protected');
-        if (response.data && response.data.phoneNum) {
-          setIsLoggedIn(true);
-          setUserName(response.data.userName);
-        }
-      } catch (err) {
-        setIsLoggedIn(false);
-        setUserName('');
-      }
-    };
-
-    fetchData();
-  }, [isLoggedIn, userName]);
 
   return (
     <>

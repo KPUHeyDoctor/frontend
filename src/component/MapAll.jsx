@@ -1,5 +1,5 @@
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import styles from '../component/MapAll.module.css';
 // import modalhospital from '../img/modalhospital.png';
@@ -17,6 +17,32 @@ function KakaoMap() {
     showMarkers: false,     // 전체병원 마커 보이기 여부 상태값
     markers: [],            // 전체병원 마커 위치 정보 배열
   });
+
+  // 전체병원
+  const ShowMarkersAll = useCallback(() => {
+    axios
+      .get('https://tukdoctor.shop/api/hospitals/categories/all')
+      .then(response => {
+        const markers = response.data.map(marker => {
+          const isOpen = checkOpen(marker.time);
+          return {
+            name: marker.BIZPLC_NM,
+            lat: marker.REFINE_WGS84_LAT,
+            lng: marker.REFINE_WGS84_LOGT,
+            isOpen,
+            time: marker.HOS_TIME,
+          };
+        });
+
+        setState(prev => ({
+          ...prev,
+          showMarkers: true,
+          markers: markers,
+        }));
+      })
+      .catch(error => console.log(error));
+  }, []);
+
   useEffect(() => {
     if (navigator.geolocation) {
       // GeoLocation을 이용해서 접속 위치를 얻어옵니다.
@@ -40,7 +66,10 @@ function KakaoMap() {
         }
       );
     }
-  }, []);
+
+    ShowMarkersAll();
+
+  }, [ShowMarkersAll]);
 
   // 영업 여부를 확인하는 함수
   const checkOpen = (timeStr) => {
@@ -71,129 +100,6 @@ function KakaoMap() {
       return true;
     }
     return false;
-  };
-  
-  // 전체병원
-  const ShowMarkersAll = () => {
-  
-    axios
-      .get('https://tukdoctor.shop/api/hospitals/categories/all')
-      .then(response => {
-        const markers = response.data.map(marker => {
-          const isOpen = checkOpen(marker.time);
-          return {
-            name: marker.BIZPLC_NM,
-            lat: marker.REFINE_WGS84_LAT,
-            lng: marker.REFINE_WGS84_LOGT,
-            isOpen,
-            time: marker.HOS_TIME,
-          };
-        });
-
-        setState(prev => ({
-          ...prev,
-          showMarkers: true,
-          markers: markers,
-        }));
-      })
-      .catch(error => console.log(error));
-  };
-  
-  
-  // 내과
-  const ShowMarkersNae = () => {
-    axios.get('https://tukdoctor.shop/api/hospitals/categories/nae')
-      .then(response => {
-        const markers = response.data.map(marker => {
-          const isOpen = checkOpen(marker.time);
-          return{
-            name: marker.BIZPLC_NM,
-            lat: marker.REFINE_WGS84_LAT,
-            lng: marker.REFINE_WGS84_LOGT,
-            isOpen,
-            time: marker.HOS_TIME,
-          };
-        });
-
-        setState((prev) => ({
-          ...prev,
-          showMarkers: true,
-          markers: markers,
-        }));
-      })
-      .catch(error => console.log(error));
-  };
-  
-  //이비인후과
-  const ShowMarkersEbin = () => {
-    axios.get('https://tukdoctor.shop/api/hospitals/categories/ebin')
-      .then(response => {
-        const markers = response.data.map(marker => {
-          const isOpen = checkOpen(marker.time);
-          return{
-            name: marker.BIZPLC_NM,
-            lat: marker.REFINE_WGS84_LAT,
-            lng: marker.REFINE_WGS84_LOGT,
-            isOpen,
-            time: marker.HOS_TIME,
-          };
-        });
-
-        setState((prev) => ({
-          ...prev,
-          showMarkers: true,
-          markers: markers,
-        }));
-      })
-      .catch(error => console.log(error));
-  };
-  
-  //소아과
-  const ShowMarkersKids = () => {
-    axios.get('https://tukdoctor.shop/api/hospitals/categories/kids')
-      .then(response => {
-        const markers = response.data.map(marker => {
-          const isOpen = checkOpen(marker.time);
-          return{
-            name: marker.BIZPLC_NM,
-            lat: marker.REFINE_WGS84_LAT,
-            lng: marker.REFINE_WGS84_LOGT,
-            isOpen,
-            time: marker.HOS_TIME,
-          };
-        });
-
-        setState((prev) => ({
-          ...prev,
-          showMarkers: true,
-          markers: markers,
-        }));
-      })
-      .catch(error => console.log(error));
-  };
-  
-  //정형외과
-  const ShowMarkersBone = () => {
-    axios.get('https://tukdoctor.shop/api/hospitals/categories/bone')
-      .then(response => {
-        const markers = response.data.map(marker => {
-          const isOpen = checkOpen(marker.time);
-          return{
-            name: marker.BIZPLC_NM,
-            lat: marker.REFINE_WGS84_LAT,
-            lng: marker.REFINE_WGS84_LOGT,
-            isOpen,
-            time: marker.HOS_TIME,
-          };
-        });
-
-        setState((prev) => ({
-          ...prev,
-          showMarkers: true,
-          markers: markers,
-        }));
-      })
-      .catch(error => console.log(error));
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -231,7 +137,7 @@ function KakaoMap() {
 
   return (
     <>
-      <div className={styles.hoslist}>
+      {/* <div className={styles.hoslist}>
         <div className={styles.btns}>
           <button className={'&{styles.btn} &{styles.btn01}'} onClick={() => ShowMarkersAll}>전체병원</button>
           <button className={'&{styles.btn} &{styles.btn02}'} onClick={() => ShowMarkersNae}>내과</button>
@@ -239,7 +145,7 @@ function KakaoMap() {
           <button className={'&{styles.btn} &{styles.btn04}'} onClick={() => ShowMarkersKids}>소아과</button>
           <button className={'&{styles.btn} &{styles.btn05}'} onClick={() => ShowMarkersBone}>정형외과</button>
         </div>
-      </div>
+      </div> */}
       <Map // 지도를 표시할 Container
         center={state.center}
         className={styles.map}
