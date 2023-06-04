@@ -15,6 +15,11 @@ import MapCateEbin from './page/MapCateEbin.jsx';
 import MapCateKids from './page/MapCateKids.jsx';
 import MapCateBone from './page/MapCateBone.jsx';
 
+import ChatNaePage from './page/ChatNaePage.jsx';
+import ChatEbinPage from './page/ChatEbinPage.jsx';
+import ChatKidsPage from './page/ChatKidsPage.jsx';
+import ChatBonePage from './page/ChatBonePage.jsx';
+
 function App() {
 
   return(
@@ -36,6 +41,12 @@ function App() {
         <Route path='/categories/ebin' element={<MapCateEbin />} />
         <Route path='/categories/kids' element={<MapCateKids />} />
         <Route path='/categories/bone' element={<MapCateBone />} />
+
+        {/* 챗봇 */}
+        <Route path='/categories/nae/sughospital' element={<ChatNaePage />} />
+        <Route path='/categories/ebin/sughospital' element={<ChatEbinPage />} />
+        <Route path='/categories/kids/sughospital' element={<ChatKidsPage />} />
+        <Route path='/categories/bone/sughospital' element={<ChatBonePage />} />
 
       </Routes>
     </BrowserRouter>

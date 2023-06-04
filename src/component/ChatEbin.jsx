@@ -1,12 +1,12 @@
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import styles from '../component/MapNae.module.css';
+import styles from '../component/MapAll.module.css';
 // import modalhospital from '../img/modalhospital.png';
 import modallocation from '../img/modallocation.png';
 import modalphone from '../img/modalphone.png';
 
-function MapNae() {
+function ChatEbin() {
   const [state, setState] = useState({
     center: {
       lat: 37.450701,
@@ -18,9 +18,9 @@ function MapNae() {
     markers: [],            // 전체병원 마커 위치 정보 배열
   });
 
-  // 내과
-  const ShowMarkersNae = useCallback(() => {
-    axios.get('https://tukdoctor.shop/api/hospitals/categories/nae')
+  //이비인후과
+  const ShowMarkersEbin = useCallback(() => {
+    axios.get('https://tukdoctor.shop/api/hospitals/categories/ebin')
       .then(response => {
         const markers = response.data.map(marker => {
           const isOpen = checkOpen(marker.time);
@@ -65,10 +65,9 @@ function MapNae() {
         }
       );
     }
-    
-    ShowMarkersNae();
+    ShowMarkersEbin();
 
-  }, [ShowMarkersNae]);
+  }, [ShowMarkersEbin]);
 
   // 영업 여부를 확인하는 함수
   const checkOpen = (timeStr) => {
@@ -204,4 +203,4 @@ function MapNae() {
   }
 
 }
-export default MapNae;
+export default ChatEbin;

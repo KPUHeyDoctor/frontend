@@ -1,12 +1,12 @@
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import styles from '../component/MapAll.module.css';
+import styles from '../component/MapKids.module.css';
 // import modalhospital from '../img/modalhospital.png';
 import modallocation from '../img/modallocation.png';
 import modalphone from '../img/modalphone.png';
 
-function KakaoMap() {
+function MapKids() {
   const [state, setState] = useState({
     center: {
       lat: 37.450701,
@@ -203,4 +203,4 @@ function KakaoMap() {
   }
 
 }
-export default KakaoMap;
+export default MapKids;

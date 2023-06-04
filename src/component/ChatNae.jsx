@@ -1,12 +1,12 @@
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import styles from '../component/MapNae.module.css';
+import styles from '../component/MapAll.module.css';
 // import modalhospital from '../img/modalhospital.png';
 import modallocation from '../img/modallocation.png';
 import modalphone from '../img/modalphone.png';
 
-function MapNae() {
+function ChatNae() {
   const [state, setState] = useState({
     center: {
       lat: 37.450701,
@@ -204,4 +204,4 @@ function MapNae() {
   }
 
 }
-export default MapNae;
+export default ChatNae;

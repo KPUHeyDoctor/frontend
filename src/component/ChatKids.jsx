@@ -1,12 +1,12 @@
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import styles from '../component/MapNae.module.css';
+import styles from '../component/MapKids.module.css';
 // import modalhospital from '../img/modalhospital.png';
 import modallocation from '../img/modallocation.png';
 import modalphone from '../img/modalphone.png';
 
-function MapNae() {
+function ChatKids() {
   const [state, setState] = useState({
     center: {
       lat: 37.450701,
@@ -18,9 +18,9 @@ function MapNae() {
     markers: [],            // 전체병원 마커 위치 정보 배열
   });
 
-  // 내과
-  const ShowMarkersNae = useCallback(() => {
-    axios.get('https://tukdoctor.shop/api/hospitals/categories/nae')
+  //소아과
+  const ShowMarkersKids = useCallback(() => {
+    axios.get('https://tukdoctor.shop/api/hospitals/categories/kids')
       .then(response => {
         const markers = response.data.map(marker => {
           const isOpen = checkOpen(marker.time);
@@ -65,10 +65,9 @@ function MapNae() {
         }
       );
     }
-    
-    ShowMarkersNae();
+    ShowMarkersKids();
 
-  }, [ShowMarkersNae]);
+  }, [ShowMarkersKids]);
 
   // 영업 여부를 확인하는 함수
   const checkOpen = (timeStr) => {
@@ -100,7 +99,7 @@ function MapNae() {
     }
     return false;
   };
-  
+
   const [showModal, setShowModal] = useState(false);
   const [hospitalInfo, setHospitalInfo] = useState(null);     // 받아온 병원 정보를 저장할 상태
 
@@ -204,4 +203,4 @@ function MapNae() {
   }
 
 }
-export default MapNae;
+export default ChatKids;

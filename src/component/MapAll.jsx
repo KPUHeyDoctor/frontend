@@ -6,7 +6,7 @@ import styles from '../component/MapAll.module.css';
 import modallocation from '../img/modallocation.png';
 import modalphone from '../img/modalphone.png';
 
-function KakaoMap() {
+function MapAll() {
   const [state, setState] = useState({
     center: {
       lat: 37.450701,
@@ -20,8 +20,7 @@ function KakaoMap() {
 
   // 전체병원
   const ShowMarkersAll = useCallback(() => {
-    axios
-      .get('https://tukdoctor.shop/api/hospitals/categories/all')
+    axios.get('https://tukdoctor.shop/api/hospitals/categories/all')
       .then(response => {
         const markers = response.data.map(marker => {
           const isOpen = checkOpen(marker.time);
@@ -205,4 +204,4 @@ function KakaoMap() {
   }
 
 }
-export default KakaoMap;
+export default MapAll;
