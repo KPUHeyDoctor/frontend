@@ -13,19 +13,18 @@ function ChatBone() {
     },
     errMsg: null,
     isLoading: true,
-    showMarkers: false,
-    markers: [],
-    nearestMarkerIndex: null, // 가장 가까운 위치의 마커
+    showMarkers: false,     // 전체병원 마커 보이기 여부 상태값
+    markers: [],            // 전체병원 마커 위치 정보 배열
+    nearestMarkerIndex: null,
   });
 
-  // 정형외과
+  //정형외과
   const ShowMarkersBone = useCallback(() => {
-    axios
-      .get('https://tukdoctor.shop/api/hospitals/categories/bone')
-      .then((response) => {
-        const markers = response.data.map((marker) => {
+    axios.get('https://tukdoctor.shop/api/hospitals/categories/bone')
+      .then(response => {
+        const markers = response.data.map(marker => {
           const isOpen = checkOpen(marker.time);
-          return {
+          return{
             name: marker.BIZPLC_NM,
             lat: marker.REFINE_WGS84_LAT,
             lng: marker.REFINE_WGS84_LOGT,
@@ -40,18 +39,19 @@ function ChatBone() {
           markers: markers,
         }));
       })
-      .catch((error) => console.log(error));
+      .catch(error => console.log(error));
   }, []);
 
   useEffect(() => {
     if (navigator.geolocation) {
+      // GeoLocation을 이용해서 접속 위치를 얻어옵니다.
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setState((prev) => ({
             ...prev,
             center: {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
+              lat: position.coords.latitude, // 위도
+              lng: position.coords.longitude, //경도
             },
             isLoading: false,
           }));
@@ -61,27 +61,34 @@ function ChatBone() {
             ...prev,
             errMsg: err.message,
             isLoading: false,
-          }));
+          }))
         }
       );
     }
     ShowMarkersBone();
+
   }, [ShowMarkersBone]);
 
+  // 영업 여부를 확인하는 함수
   const checkOpen = (timeStr) => {
     if (!timeStr) {
       return true;
     }
 
+    // 문자열을 ":"을 기준으로 분리하여 시간과 분으로 나눔
     const [startHour, startMinute, endHour, endMinute] = timeStr.split(/[:~-]/);
+    // 현재 시간을 가져옴
     const now = new Date();
     const currentHour = now.getHours();
     const currentMinute = now.getMinutes();
 
+    // 현재 시간이 startHour와 endHour 사이에 있는 경우 영업중으로 판단
     if (currentHour >= startHour && currentHour <= endHour) {
+      // startHour와 endHour가 같은 경우, startMinute과 endMinute을 비교하여 판단
       if (currentHour === startHour && currentHour === endHour) {
         return currentMinute >= startMinute && currentMinute < endMinute;
       }
+      // startHour와 endHour가 다른 경우, startHour와 endHour을 비교하여 판단
       if (currentHour === startHour) {
         return currentMinute >= startMinute;
       }
@@ -145,9 +152,12 @@ function ChatBone() {
   }, [state.isLoading, getNearestLocation]);
 
   const [showModal, setShowModal] = useState(false);
-  const [hospitalInfo, setHospitalInfo] = useState(null);
+  const [hospitalInfo, setHospitalInfo] = useState(null);     // 받아온 병원 정보를 저장할 상태
 
   function HospitalModal({ hospitalInfo, onClose }) {
+    console.log(hospitalInfo);
+    console.log(onClose);
+
     return (
       <div className={styles.modal}>
         <div className={styles.modalcontent}>
@@ -158,14 +168,16 @@ function ChatBone() {
           </span>
 
           <span className={styles.modaladdr}>
-            <img src={modallocation} alt="" className={styles.modal2} />
+            <img src={modallocation} alt="" className={styles.modal2}/>
             <p>{hospitalInfo[0].REFINE_ROADNM_ADDR}</p>
           </span>
 
           <span className={styles.modalphone}>
-            <img src={modalphone} alt="" className={styles.modal3} />
+            <img src={modalphone} alt="" className={styles.modal3}/>
             <p>{hospitalInfo[0].LOCPLC_FACLT_TELNO_DTLS}</p>
           </span>
+
+          {/* <button className={styles.reserbtn}>예약하기</button> */}
         </div>
       </div>
     );
@@ -173,24 +185,24 @@ function ChatBone() {
 
   return (
     <>
-      <Map
+      <Map // 지도를 표시할 Container
         center={state.center}
         className={styles.map}
-        level={3}
+        level={3} // 지도의 확대 레벨
       >
         {!state.isLoading && (
           <MapMarker
-            position={state.center}
+            position={state.center}    // 현재위치
             image={{
               src: "../img/cloca.gif",
               size: {
                 width: 50,
                 height: 50,
-              },
+              }
             }}
-          />
+           />
         )}
-
+      
         {state.showMarkers &&
           state.markers.map((marker, index) => (
             <MapMarker
@@ -199,18 +211,18 @@ function ChatBone() {
               title={marker.name}
               onClick={() => {
                 const selectedName = marker.name;
-                axios
-                  .get('https://tukdoctor.shop/api/hospitals/categories/findName', {
-                    params: { hospital_name: selectedName },
-                  })
-                  .then((response) => {
+                axios.get('https://tukdoctor.shop/api/hospitals/categories/findName', { params: { hospital_name: selectedName } })
+                  .then(response => {
                     setHospitalInfo(response.data);
+                    // console.log(hospitalInfo);
                     setShowModal(true);
+                    // console.log(showModal);
                   })
-                  .catch((error) => {
-                    console.log(error);
-                  });
+                  .catch(error => {
+                    console.log(error)
+                  })
               }}
+              
               image={{
                 src:
                   index === state.nearestMarkerIndex
@@ -224,7 +236,8 @@ function ChatBone() {
                 },
               }}
             />
-          ))}
+          ))
+        }
         {showModal && <HospitalModal hospitalInfo={hospitalInfo} onClose={closeModal} />}
       </Map>
     </>
@@ -234,6 +247,6 @@ function ChatBone() {
     setShowModal(false);
     setHospitalInfo(null);
   }
-}
 
+}
 export default ChatBone;
