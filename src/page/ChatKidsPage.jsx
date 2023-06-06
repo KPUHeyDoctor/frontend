@@ -1,7 +1,7 @@
 import Header from '../component/Header';
 import ChatKids from '../component/ChatKids';
 
-export default function CHatKidsPage() {
+export default function ChatKidsPage() {
   return(
     <>
     <Header />
