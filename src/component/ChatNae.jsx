@@ -16,6 +16,7 @@ function ChatNae() {
     isLoading: true,
     showMarkers: false,     // 전체병원 마커 보이기 여부 상태값
     markers: [],            // 전체병원 마커 위치 정보 배열
+    nearestMarkerIndex: null,
   });
 
   // 내과
@@ -100,6 +101,57 @@ function ChatNae() {
     }
     return false;
   };
+
+  const getNearestLocation = useCallback(() => {
+    const getDistance = (lat1, lng1, lat2, lng2) => {
+      const earthRadius = 6371; // 지구의 반지름 (단위: km)
+    
+      // 각도를 라디안으로 변환
+      const toRadians = (degrees) => {
+        return degrees * (Math.PI / 180);
+      };
+    
+      // 위도 및 경도 차이 계산
+      const deltaLat = toRadians(lat2 - lat1);
+      const deltaLng = toRadians(lng2 - lng1);
+    
+      // Haversine 공식 적용
+      const a =
+        Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
+        Math.cos(toRadians(lat1)) *
+          Math.cos(toRadians(lat2)) *
+          Math.sin(deltaLng / 2) *
+          Math.sin(deltaLng / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const distance = earthRadius * c;
+    
+      return distance;
+    };
+
+    const { markers, center } = state;
+    let nearestDistance = Infinity;
+    let nearestIndex = null;
+
+    markers.forEach((marker, index) => {
+      const { lat, lng } = marker;
+      const distance = getDistance(center.lat, center.lng, lat, lng);
+      if (distance < nearestDistance) {
+        nearestDistance = distance;
+        nearestIndex = index;
+      }
+    });
+
+    setState((prev) => ({
+      ...prev,
+      nearestMarkerIndex: nearestIndex,
+    }));
+  }, [state]);
+
+  useEffect(() => {
+    if (!state.isLoading) {
+      getNearestLocation();
+    }
+  }, [state.isLoading, getNearestLocation]);
   
   const [showModal, setShowModal] = useState(false);
   const [hospitalInfo, setHospitalInfo] = useState(null);     // 받아온 병원 정보를 저장할 상태
@@ -114,7 +166,6 @@ function ChatNae() {
           <button className={styles.close} onClick={onClose}>X</button>
 
           <span className={styles.modalname}>
-            {/* <img src={modalhospital} alt="" className={styles.modal1}/> */}
             <h1>{hospitalInfo[0].BIZPLC_NM}</h1>
           </span>
 
@@ -136,15 +187,6 @@ function ChatNae() {
 
   return (
     <>
-      {/* <div className={styles.hoslist}>
-        <div className={styles.btns}>
-          <button className={'&{styles.btn} &{styles.btn01}'} onClick={() => ShowMarkersAll}>전체병원</button>
-          <button className={'&{styles.btn} &{styles.btn02}'} onClick={() => ShowMarkersNae}>내과</button>
-          <button className={'&{styles.btn} &{styles.btn03}'} onClick={() => ShowMarkersEbin}>이비인후과</button>
-          <button className={'&{styles.btn} &{styles.btn04}'} onClick={() => ShowMarkersKids}>소아과</button>
-          <button className={'&{styles.btn} &{styles.btn05}'} onClick={() => ShowMarkersBone}>정형외과</button>
-        </div>
-      </div> */}
       <Map // 지도를 표시할 Container
         center={state.center}
         className={styles.map}
@@ -184,11 +226,16 @@ function ChatNae() {
               }}
               
               image={{
-                src: checkOpen(marker.time) ? "../img/start1.png" : "../img/end1.png",
+                src:
+                  index === state.nearestMarkerIndex
+                    ? "../img/ambulance.gif"
+                    : checkOpen(marker.time)
+                    ? "../img/start1.png"
+                    : "../img/end1.png",
                 size: {
                   width: 30,
                   height: 30,
-                }
+                },
               }}
             />
           ))

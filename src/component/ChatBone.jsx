@@ -18,6 +18,7 @@ function ChatBone() {
     nearestMarkerIndex: null, // 가장 가까운 위치의 마커
   });
 
+  // 정형외과
   const ShowMarkersBone = useCallback(() => {
     axios
       .get('https://tukdoctor.shop/api/hospitals/categories/bone')
@@ -150,9 +151,7 @@ function ChatBone() {
     return (
       <div className={styles.modal}>
         <div className={styles.modalcontent}>
-          <button className={styles.close} onClick={onClose}>
-            X
-          </button>
+          <button className={styles.close} onClick={onClose}>X</button>
 
           <span className={styles.modalname}>
             <h1>{hospitalInfo[0].BIZPLC_NM}</h1>
@@ -174,7 +173,11 @@ function ChatBone() {
 
   return (
     <>
-      <Map center={state.center} className={styles.map} level={3}>
+      <Map
+        center={state.center}
+        className={styles.map}
+        level={3}
+      >
         {!state.isLoading && (
           <MapMarker
             position={state.center}
