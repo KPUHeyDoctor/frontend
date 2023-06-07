@@ -58,6 +58,9 @@ function MemJoin() {
       const response = await axios.post('https://tukdoctor.shop/api/join/member', formattedMember);
       console.log(response.data);
       if (response.data.message === 'ok') {
+
+        localStorage.setItem('userName', member.userName);
+        
         alert('회원가입이 완료되었습니다.');
         window.location.replace('/memlog');
       } else {

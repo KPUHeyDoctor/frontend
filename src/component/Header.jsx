@@ -14,13 +14,13 @@ function Header() {
       const token = localStorage.getItem('token');
       if (token) {
         setIsLoggedIn(true);
-        await fetchUserInfo(); // 사용자 정보를 가져오는 로직을 수정
+        fetchUserInfo(); // 사용자 정보를 가져오는 로직을 useEffect 내에서 호출
       }
     };
-
+  
     checkLoginStatus();
   }, []);
-
+  
   const fetchUserInfo = async () => {
     try {
       const res = await axios.get('https://tukdoctor.shop/api/userinfo', {
@@ -29,8 +29,9 @@ function Header() {
         }
       });
       if (res.data.userName) {
-        setUserName(res.data.userName);
-        setPhoneNum(res.data.phoneNum);
+        // 로그인된 사용자 이름이 localStorage에 저장되어 있다면 가져와서 설정
+        const storedUserName = localStorage.getItem('userName');
+        setUserName(storedUserName);
       }
     } catch (err) {
       console.log(err);
@@ -54,7 +55,7 @@ function Header() {
   return (
     <>
       <div className={styles.header}>
-        <Link to="/choologin">
+        <Link to="/">
           <img src={LogoImg} alt="logo" className={styles.logo}></img>
         </Link>
 
