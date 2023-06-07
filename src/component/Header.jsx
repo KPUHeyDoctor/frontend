@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import LogoImg from '../img/heydoctor.png';
 import styles from '../component/Header.module.css';
@@ -9,13 +9,42 @@ function Header() {
   const [userName, setUserName] = useState('');
   const [phoneNum, setPhoneNum] = useState('');
 
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        setIsLoggedIn(true);
+        fetchUserInfo();
+      }
+    };
+
+    checkLoginStatus();
+  }, []);
+
+  const fetchUserInfo = async () => {
+    try {
+      const res = await axios.get('https://tukdoctor.shop/api/userinfo', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      if (res.data.userName) {
+        setUserName(res.data.userName);
+        setPhoneNum(res.data.phoneNum);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleLogout = () => {
-    axios.post('https://tukdoctor.shop/api/logout', { phoneNum: phoneNum })
+    axios
+      .post('https://tukdoctor.shop/api/logout', { phoneNum: phoneNum })
       .then((res) => {
         setIsLoggedIn(false);
         setUserName('');
         setPhoneNum('');
-        console.log('Logout successful!');
+        window.location.replace('/');
       })
       .catch((err) => {
         console.log(err);
@@ -25,8 +54,8 @@ function Header() {
   return (
     <>
       <div className={styles.header}>
-        <Link to="/choologin">
-          <img src={LogoImg} alt='logo' className={styles.logo}></img>
+        <Link to="/">
+          <img src={LogoImg} alt="logo" className={styles.logo}></img>
         </Link>
 
         {/* USERLIST */}
@@ -37,19 +66,27 @@ function Header() {
                 <span className={styles.login}>{userName}</span>
               </li>
               <li>
-                <Link to="/logout" className={styles.logout} onClick={handleLogout}>LogOut</Link>
+                <Link to="/logout" className={styles.logout} onClick={handleLogout}>
+                  LogOut
+                </Link>
               </li>
               <li>
-                <Link to="/mypage" className={styles.mypage}>MyPage</Link>
+                <Link to="/mypage" className={styles.mypage}>
+                  MyPage
+                </Link>
               </li>
             </>
           ) : (
             <>
               <li>
-                <Link to="/choologin" className={styles.login}>Login</Link>
+                <Link to="/choologin" className={styles.login}>
+                  Login
+                </Link>
               </li>
               <li>
-                <Link to="/choojoin" className={styles.join}>Join</Link>
+                <Link to="/choojoin" className={styles.join}>
+                  Join
+                </Link>
               </li>
             </>
           )}
