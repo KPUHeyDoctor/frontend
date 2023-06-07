@@ -10,11 +10,11 @@ function Header() {
   const [phoneNum, setPhoneNum] = useState('');
 
   useEffect(() => {
-    const checkLoginStatus = () => {
+    const checkLoginStatus = async () => {
       const token = localStorage.getItem('token');
       if (token) {
         setIsLoggedIn(true);
-        fetchUserInfo();
+        await fetchUserInfo(); // 사용자 정보를 가져오는 로직을 수정
       }
     };
 
@@ -54,7 +54,7 @@ function Header() {
   return (
     <>
       <div className={styles.header}>
-        <Link to="/">
+        <Link to="/choologin">
           <img src={LogoImg} alt="logo" className={styles.logo}></img>
         </Link>
 
