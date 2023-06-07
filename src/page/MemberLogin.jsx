@@ -1,10 +1,10 @@
-import Header from '../component/Header.jsx';
 import MemLog from '../component/MemLog.jsx';
+import SubHeader from '../component/SubHeader.jsx';
 
 function MemberLogin() {
   return(
     <div>
-      <Header />
+      <SubHeader />
       <MemLog />
     </div>
   );
