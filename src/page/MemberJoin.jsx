@@ -1,10 +1,10 @@
-import SubHeader from '../component/SubHeader.jsx';
+import Header from '../component/Header.jsx';
 import MemJoin from '../component/MemJoin.jsx';
 
 function MemberJoin() {
   return(
     <div>
-      <SubHeader />
+      <Header />
       <MemJoin />
     </div>
   );
