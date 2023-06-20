@@ -1,11 +1,13 @@
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 import styles from '../component/KakaoMap.module.css';
 import modallocation from '../img/modallocation.png';
 import modalphone from '../img/modalphone.png';
+import nearMarkerImage from '../img/near01.gif';
 
-function ChatNae() {
+function KakaoMap() {
   const [state, setState] = useState({
     center: {
       lat: 37.450701,
@@ -13,45 +15,20 @@ function ChatNae() {
     },
     errMsg: null,
     isLoading: true,
-    showMarkers: false,     // 전체병원 마커 보이기 여부 상태값
-    markers: [],            // 전체병원 마커 위치 정보 배열
-    nearestMarkerIndex: null,
+    showMarkers: false,
+    markers: [],
+    nearestMarkerIndex: null, // 가장 가까운 마커의 인덱스
   });
-
-  // 내과
-  const ShowMarkersNae = useCallback(() => {
-    axios.get('https://tukdoctor.shop/api/hospitals/categories/nae')
-      .then(response => {
-        const markers = response.data.map(marker => {
-          const isOpen = checkOpen(marker.time);
-          return{
-            name: marker.BIZPLC_NM,
-            lat: marker.REFINE_WGS84_LAT,
-            lng: marker.REFINE_WGS84_LOGT,
-            isOpen,
-            time: marker.HOS_TIME,
-          };
-        });
-
-        setState((prev) => ({
-          ...prev,
-          showMarkers: true,
-          markers: markers,
-        }));
-      })
-      .catch(error => console.log(error));
-  }, []);
 
   useEffect(() => {
     if (navigator.geolocation) {
-      // GeoLocation을 이용해서 접속 위치를 얻어옵니다.
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setState((prev) => ({
             ...prev,
             center: {
-              lat: position.coords.latitude, // 위도
-              lng: position.coords.longitude, //경도
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
             },
             isLoading: false,
           }));
@@ -61,14 +38,11 @@ function ChatNae() {
             ...prev,
             errMsg: err.message,
             isLoading: false,
-          }))
+          }));
         }
       );
     }
-    
-    ShowMarkersNae();
-
-  }, [ShowMarkersNae]);
+  }, []);
 
   // 영업 여부를 확인하는 함수
   const checkOpen = (timeStr) => {
@@ -101,57 +75,74 @@ function ChatNae() {
     return false;
   };
 
-  const getNearestLocation = useCallback(() => {
-    const getDistance = (lat1, lng1, lat2, lng2) => {
-      const earthRadius = 6371; // 지구의 반지름 (단위: km)
-    
-      // 각도를 라디안으로 변환
-      const toRadians = (degrees) => {
-        return degrees * (Math.PI / 180);
-      };
-    
-      // 위도 및 경도 차이 계산
-      const deltaLat = toRadians(lat2 - lat1);
-      const deltaLng = toRadians(lng2 - lng1);
-    
-      // Haversine 공식 적용
-      const a =
-        Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
-        Math.cos(toRadians(lat1)) *
-          Math.cos(toRadians(lat2)) *
-          Math.sin(deltaLng / 2) *
-          Math.sin(deltaLng / 2);
-      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-      const distance = earthRadius * c;
-    
-      return distance;
-    };
+  // 내과
+  const ShowMarkersNae = () => {
+    axios.get('https://tukdoctor.shop/api/hospitals/categories/nae')
+      .then(response => {
+        const markers = response.data.map(marker => {
+          const isOpen = checkOpen(marker.time);
+          return{
+            name: marker.BIZPLC_NM,
+            lat: marker.REFINE_WGS84_LAT,
+            lng: marker.REFINE_WGS84_LOGT,
+            isOpen,
+            time: marker.HOS_TIME,
+          };
+        });
 
+        setState((prev) => ({
+          ...prev,
+          showMarkers: true,
+          markers: markers,
+        }));
+      })
+      .catch(error => console.log(error));
+  };
+
+  const findNearestMarker = React.useCallback(() => {
     const { markers, center } = state;
-    let nearestDistance = Infinity;
-    let nearestIndex = null;
-
-    markers.forEach((marker, index) => {
-      const { lat, lng } = marker;
-      const distance = getDistance(center.lat, center.lng, lat, lng);
-      if (distance < nearestDistance) {
-        nearestDistance = distance;
-        nearestIndex = index;
+  
+    let nearestMarkerIndex = null;
+    let minDistance = Number.MAX_VALUE;
+  
+    for (let i = 0; i < markers.length; i++) {
+      const marker = markers[i];
+      const distance = getDistance(center.lat, center.lng, marker.lat, marker.lng);
+  
+      if (distance < minDistance) {
+        minDistance = distance;
+        nearestMarkerIndex = i;
       }
-    });
-
+    }
+  
     setState((prev) => ({
       ...prev,
-      nearestMarkerIndex: nearestIndex,
+      nearestMarkerIndex,
     }));
   }, [state]);
-
-  useEffect(() => {
-    if (!state.isLoading) {
-      getNearestLocation();
-    }
-  }, [state.isLoading, getNearestLocation]);
   
+
+  const getDistance = (lat1, lng1, lat2, lng2) => {
+    const R = 6371; // 지구의 반지름 (단위: km)
+  
+    const degToRad = (deg) => {
+      return deg * (Math.PI / 180);
+    };
+  
+    const dLat = degToRad(lat2 - lat1);
+    const dLng = degToRad(lng2 - lng1);
+  
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(degToRad(lat1)) * Math.cos(degToRad(lat2)) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+      
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+  
+    return distance;
+  };
+  
+
   const [showModal, setShowModal] = useState(false);
   const [hospitalInfo, setHospitalInfo] = useState(null);     // 받아온 병원 정보를 저장할 상태
 
@@ -165,6 +156,7 @@ function ChatNae() {
           <button className={styles.close} onClick={onClose}>X</button>
 
           <span className={styles.modalname}>
+            {/* <img src={modalhospital} alt="" className={styles.modal1}/> */}
             <h1>{hospitalInfo[0].BIZPLC_NM}</h1>
           </span>
 
@@ -184,8 +176,21 @@ function ChatNae() {
     );
   }
 
+  useEffect(() => {
+    if (state.markers.length > 0) {
+      findNearestMarker();
+    }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.markers.length]);  
+
   return (
     <>
+      <div className={styles.hoslist}>
+        <div className={styles.btns}>
+          <button className={'&{styles.btn} &{styles.btn02}'} onClick={ShowMarkersNae}>내과</button>
+        </div>
+      </div>
       <Map // 지도를 표시할 Container
         center={state.center}
         className={styles.map}
@@ -225,15 +230,10 @@ function ChatNae() {
               }}
               
               image={{
-                src:
-                  index === state.nearestMarkerIndex
-                    ? "../img/near05.gif"
-                    : checkOpen(marker.time)
-                    ? "../img/start1.png"
-                    : "../img/end1.png",
+                src: index === state.nearestMarkerIndex ? nearMarkerImage : checkOpen(marker.time) ? "../img/start1.png" : "../img/end1.png",
                 size: {
-                  width: 30,
-                  height: 30,
+                  width: index === state.nearestMarkerIndex ? 60 : 30,
+                  height: index === state.nearestMarkerIndex ? 60 : 30,
                 },
               }}
             />
@@ -250,4 +250,4 @@ function ChatNae() {
   }
 
 }
-export default ChatNae;
+export default KakaoMap;
