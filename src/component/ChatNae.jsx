@@ -202,8 +202,8 @@ function KakaoMap() {
             image={{
               src: "/img/cloca.gif",
               size: {
-                width: 50,
-                height: 50,
+                width: 30,
+                height: 30,
               }
             }}
            />

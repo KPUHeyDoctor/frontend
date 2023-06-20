@@ -5,7 +5,9 @@ export default function ChatEbinPage() {
   return(
     <>
     <Header />
-    <ChatEbin />
+    <div style={{ marginTop: '60px' }}>
+      <ChatEbin />
+    </div>
     </>
   );
 }

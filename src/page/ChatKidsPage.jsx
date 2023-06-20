@@ -5,7 +5,9 @@ export default function ChatKidsPage() {
   return(
     <>
     <Header />
-    <ChatKids />
+    <div style={{ marginTop: '60px' }}>
+      <ChatKids />
+    </div>
     </>
   );
 }

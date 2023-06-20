@@ -5,7 +5,9 @@ export default function ChatNaePage() {
   return(
     <>
     <Header />
-    <ChatNae />
+    <div style={{ marginTop: '60px' }}>
+      <ChatNae />
+    </div>
     </>
   );
 }
