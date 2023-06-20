@@ -200,7 +200,7 @@ function KakaoMap() {
           <MapMarker
             position={state.center}    // 현재위치
             image={{
-              src: "../img/cloca.gif",
+              src: "/img/cloca.gif",
               size: {
                 width: 50,
                 height: 50,
@@ -230,7 +230,7 @@ function KakaoMap() {
               }}
               
               image={{
-                src: index === state.nearestMarkerIndex ? nearMarkerImage : checkOpen(marker.time) ? "../img/start1.png" : "../img/end1.png",
+                src: index === state.nearestMarkerIndex ? nearMarkerImage : checkOpen(marker.time) ? "/img/start1.png" : "/img/end1.png",
                 size: {
                   width: index === state.nearestMarkerIndex ? 60 : 30,
                   height: index === state.nearestMarkerIndex ? 60 : 30,
