@@ -1,9 +1,7 @@
 import Header from '../component/Header';
 import Info from '../component/Info';
 import MainTec from '../component/MainTec';
-// import KakaoMap from '../component/KakaoMap';
-import ChatEbin from '../component/ChatEbin';
-
+import KakaoMap from '../component/KakaoMap';
 
 function MainPage() {
   return (
@@ -11,8 +9,7 @@ function MainPage() {
     <Header />
     <Info />
     <MainTec />
-    {/* <KakaoMap /> */}
-    <ChatEbin />
+    <KakaoMap />
     </>
   );
 }

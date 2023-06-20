@@ -188,7 +188,7 @@ function KakaoMap() {
     <>
       <div className={styles.hoslist}>
         <div className={styles.btns}>
-          <button className={'&{styles.btn} &{styles.btn02}'} onClick={ShowMarkersNae}>내과</button>
+          <button className={'&{styles.btn} &{styles.btn02}'} onClick={ShowMarkersNae}>가까운 내과 확인하기</button>
         </div>
       </div>
       <Map // 지도를 표시할 Container
