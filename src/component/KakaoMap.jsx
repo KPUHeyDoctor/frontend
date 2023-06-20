@@ -5,7 +5,6 @@ import styles from '../component/KakaoMap.module.css';
 // import modalhospital from '../img/modalhospital.png';
 import modallocation from '../img/modallocation.png';
 import modalphone from '../img/modalphone.png';
-import { useNavigate } from 'react-router-dom';
 
 function KakaoMap() {
   const [state, setState] = useState({
@@ -75,9 +74,7 @@ function KakaoMap() {
   };
   
   // 전체병원
-  const ShowMarkersAll = () => {
-    const navigate = useNavigate();
-  
+  const ShowMarkersAll = () => {  
     axios
       .get('https://tukdoctor.shop/api/hospitals/categories/all')
       .then(response => {
@@ -97,8 +94,6 @@ function KakaoMap() {
           showMarkers: true,
           markers: markers,
         }));
-
-        navigate('/categories/all'); // URL 변경
       })
       .catch(error => console.log(error));
   };
@@ -237,11 +232,11 @@ function KakaoMap() {
     <>
       <div className={styles.hoslist}>
         <div className={styles.btns}>
-          <button className={'&{styles.btn} &{styles.btn01}'} onClick={() => ShowMarkersAll}>전체병원</button>
-          <button className={'&{styles.btn} &{styles.btn02}'} onClick={() => ShowMarkersNae}>내과</button>
-          <button className={'&{styles.btn} &{styles.btn03}'} onClick={() => ShowMarkersEbin}>이비인후과</button>
-          <button className={'&{styles.btn} &{styles.btn04}'} onClick={() => ShowMarkersKids}>소아과</button>
-          <button className={'&{styles.btn} &{styles.btn05}'} onClick={() => ShowMarkersBone}>정형외과</button>
+          <button className={'&{styles.btn} &{styles.btn01}'} onClick={ShowMarkersAll}>전체병원</button>
+          <button className={'&{styles.btn} &{styles.btn02}'} onClick={ShowMarkersNae}>내과</button>
+          <button className={'&{styles.btn} &{styles.btn03}'} onClick={ShowMarkersEbin}>이비인후과</button>
+          <button className={'&{styles.btn} &{styles.btn04}'} onClick={ShowMarkersKids}>소아과</button>
+          <button className={'&{styles.btn} &{styles.btn05}'} onClick={ShowMarkersBone}>정형외과</button>
         </div>
       </div>
       <Map // 지도를 표시할 Container
