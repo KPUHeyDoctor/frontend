@@ -1,7 +1,8 @@
 import Header from '../component/Header';
 import Info from '../component/Info';
 import MainTec from '../component/MainTec';
-import KakaoMap from '../component/KakaoMap';
+// import KakaoMap from '../component/KakaoMap';
+import ChatNae from '../component/ChatNae';
 
 function MainPage() {
   return (
@@ -9,7 +10,8 @@ function MainPage() {
     <Header />
     <Info />
     <MainTec />
-    <KakaoMap />
+    {/* <KakaoMap /> */}
+    <ChatNae />
     </>
   );
 }

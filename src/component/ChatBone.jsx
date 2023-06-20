@@ -226,8 +226,9 @@ function ChatBone() {
               image={{
                 src:
                   index === state.nearestMarkerIndex
-                    ? "../img/ambulance.gif"
-                    : checkOpen(marker.time)
+                    ? "../img/near05.gif"
+                    :
+                    checkOpen(marker.time)
                     ? "../img/start1.png"
                     : "../img/end1.png",
                 size: {
