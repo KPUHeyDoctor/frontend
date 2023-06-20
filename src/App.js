@@ -9,11 +9,11 @@ import EnterJoin from './page/EnterJoin.jsx';
 import ReserDoc from './page/ReserDoc.jsx';
 import ReserTime from './page/ReserTime.jsx';
 import MyPage from './page/MyPage.jsx';
-import MapCateAll from './page/MapCateAll.jsx';
-import MapCateNae from './page/MapCateNae.jsx';
-import MapCateEbin from './page/MapCateEbin.jsx';
-import MapCateKids from './page/MapCateKids.jsx';
-import MapCateBone from './page/MapCateBone.jsx';
+// import MapCateAll from './page/MapCateAll.jsx';
+// import MapCateNae from './page/MapCateNae.jsx';
+// import MapCateEbin from './page/MapCateEbin.jsx';
+// import MapCateKids from './page/MapCateKids.jsx';
+// import MapCateBone from './page/MapCateBone.jsx';
 
 import ChatNaePage from './page/ChatNaePage.jsx';
 import ChatEbinPage from './page/ChatEbinPage.jsx';
@@ -36,11 +36,11 @@ function App() {
         <Route path="/date" element={<ReserTime />}/>
         <Route path="/mypage" element={<MyPage />}/>
 
-        <Route path='/categories/all' element={<MapCateAll />} />
+        {/* <Route path='/categories/all' element={<MapCateAll />} />
         <Route path='/categories/nae' element={<MapCateNae />} />
         <Route path='/categories/ebin' element={<MapCateEbin />} />
         <Route path='/categories/kids' element={<MapCateKids />} />
-        <Route path='/categories/bone' element={<MapCateBone />} />
+        <Route path='/categories/bone' element={<MapCateBone />} /> */}
 
         {/* 챗봇 */}
         <Route path='/categories/nae/sughospital' element={<ChatNaePage />} />

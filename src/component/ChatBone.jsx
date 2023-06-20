@@ -1,7 +1,7 @@
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import styles from '../component/MapBone.module.css';
+import styles from '../component/KakaoMap.module.css';
 import modallocation from '../img/modallocation.png';
 import modalphone from '../img/modalphone.png';
 

@@ -43,13 +43,13 @@ function Header() {
                 <span className={styles.login}>{userName}</span>
               </li>
               <li>
-                <Link to="/logout" className={styles.logout} onClick={handleLogout}>
-                  LogOut
+                <Link to="/mypage" className={styles.mypage}>
+                  MyPage
                 </Link>
               </li>
               <li>
-                <Link to="/mypage" className={styles.mypage}>
-                  MyPage
+                <Link to="/logout" className={styles.logout} onClick={handleLogout}>
+                  LogOut
                 </Link>
               </li>
             </>
