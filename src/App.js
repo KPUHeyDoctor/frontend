@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './page/MainPage.jsx';
-import EnterHeader from './page/EnterHeader.jsx';
+import EntMainPage from './page/EntMainPage.jsx';
 import ChooseLogin from './page/ChooseLogin.jsx';
 import ChooseJoin from './page/ChooseJoin.jsx';
 import MemberLogin from './page/MemberLogin.jsx';
@@ -27,7 +27,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage />}/>
-        <Route path="/EnterHeader" element={<EnterHeader/>}/>
+        <Route path="/EntMainPage" element={<EntMainPage/>}/>
         <Route path="/choologin" element={<ChooseLogin />}/>
         <Route path="/choojoin" element={<ChooseJoin />}/>
         <Route path="/memlog" element={<MemberLogin />}/>
