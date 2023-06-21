@@ -4,21 +4,38 @@ import styles from '../component/EntLog.module.css';
 import login from '../img/login.png';
 
 function EntLog() {
-  const [hospitalId, setHospitalId] = useState('');
-  const [hospitalPw, setHospitalPw] = useState('');
-  const [id, setId] = useState(false);
-  const [pw, setPw] = useState(false);
 
-  const loginClick = (event) => {
-    event.preventDefault();
-    axios.post('https://tukdoctor.shop/login/enterprise', { hospitalId, hospitalPw })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+  const [enter, setEnter] = useState({
+    enterpriseId: '',
+    enterprisePw: '',
+  })
+
+  const loginClick = async () => {
+    try {
+      const url = 'https://tukdoctor.shop/api/login/enterprise';
+      const data = {
+        enterpriseId: enter.enterpriseId,
+        enterprisePw: enter.enterprisePw,
+      };
+
+      const res = await axios.post(url, data);
+
+      if ('enterpriseName' in res.data) {
+        console.log('로그인 성공:', res.data.enterpriseName);
+
+        // 토큰을 로컬 스토리지에 저장
+        localStorage.setItem('token', res.data.token);
+
+        // 로그인 상태를 true로 설정
+        // 로그인된 페이지로 리디렉션
+        window.location.replace('/');
+      } else if ('message' in res.data && res.data.message === 'Invalid credentials!') {
+        console.log('로그인 실패');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className={styles.bg}>
@@ -31,16 +48,11 @@ function EntLog() {
         type="id"
         id="id"
         className={styles.hosid}
-        onFocus={() => {
-          setId(true);
-        }}
-        onBlur={() => {
-          setId(false);
-        }}
-        placeholder={id === true ? "" : "heydoctor"}
-        value={hospitalId}
+        value={enter.enterpriseId}
+        required
+        placeholder='HeyDoctor'
         onChange={(e) => {
-          setHospitalId(e.target.value);
+          setEnter({...enter, enterpriseId: e.target.value});
         }}
       />
 
@@ -49,16 +61,11 @@ function EntLog() {
         type="pw"
         id="pw"
         className={styles.hospw}
-        onFocus={() => {
-          setPw(true);
-        }}
-        onBlur={() => {
-          setPw(false);
-        }}
-        placeholder={pw === true ? "" : "password"}
-        value={hospitalPw}
+        value={enter.enterprisePw}
+        required
+        placeholder='비밀번호'
         onChange={(e) => {
-          setHospitalPw(e.target.value);
+          setEnter({...enter, enterprisePw: e.target.value});
         }}
       />
       <button className={styles.logbtn} onClick={loginClick}>LOGIN</button>
