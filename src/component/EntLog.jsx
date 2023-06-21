@@ -28,7 +28,7 @@ function EntLog() {
 
         // 로그인 상태를 true로 설정
         // 로그인된 페이지로 리디렉션
-        window.location.replace('/');
+        window.location.replace('/EntMainPage');
       } else if ('message' in res.data && res.data.message === 'Invalid credentials!') {
         console.log('로그인 실패');
       }
