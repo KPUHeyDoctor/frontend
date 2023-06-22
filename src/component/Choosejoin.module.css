@@ -19,6 +19,7 @@
 .bg .chosbtn .mem {
   border: none;
   background-color: transparent;
+  margin-right: 50px;
 }
 .bg .chosbtn .memrec {
   display: flex;
@@ -28,6 +29,7 @@
 .bg .chosbtn .enter {
   border: none;
   background-color: transparent;
+  margin-left: 50px;
 }
 .bg .chosbtn .entrec {
   display: flex;

@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import login from '../img/login.png';
 import styles from '../component/Chooselog.module.css';
-import Rec from '../img/rectangle.png';
+import member from '../img/member.png';
+import enter from '../img/enter.png';
 
 function Chooselog() {
   return(
@@ -12,12 +13,12 @@ function Chooselog() {
       <span className={styles.chosbtn}>
         <Link to="/memlog">
           <button className={styles.mem}>
-            <img src={Rec} alt='rec' className={styles.memrec}></img>
+            <img src={member} alt='rec' className={styles.memrec}></img>
             회원로그인</button>
         </Link>
         <Link to="/entlog">
           <button className={styles.enter}>
-            <img src={Rec} alt='rec' className={styles.entrec}></img>
+            <img src={enter} alt='rec' className={styles.entrec}></img>
             기업로그인</button>
         </Link>
       </span>

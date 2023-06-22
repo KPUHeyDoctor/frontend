@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import join from '../img/join.png';
 import styles from '../component/Choosejoin.module.css';
-import Rec from '../img/rectangle.png';
+import member from '../img/member.png';
+import enter from '../img/enter.png';
 
 function Choosejoin() {
   return(
@@ -12,12 +13,12 @@ function Choosejoin() {
       <span className={styles.chosbtn}>
         <Link to="/memjoin">
           <button className={styles.mem}>
-            <img src={Rec} alt='rec' className={styles.memrec}></img>
+            <img src={member} alt='rec' className={styles.memrec}></img>
             회원가입</button>
         </Link>
         <Link to="/entjoin">
           <button className={styles.enter}>
-            <img src={Rec} alt='rec' className={styles.entrec}></img>
+            <img src={enter} alt='rec' className={styles.entrec}></img>
             기업가입</button>
         </Link>
       </span>

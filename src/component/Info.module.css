@@ -8,7 +8,7 @@
   align-items: center;
 }
 
-.info .swiper_0001 {
+.info .swiper_001 {
   position: absolute;
   background-color: transparent;
   border: none;
@@ -16,28 +16,13 @@
   align-items: center;
   justify-content: center;
   margin-top: auto;
-  margin-left: -15%;
+  margin-left: -10%;
   z-index: 1;
-}
-.info .swiper_0001 img:first-child {
-  position: relative;
-}
-
-.info .swiper_0001 .swiperhos {
-  position: absolute;
-  top: 50%;
-  left: 75%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  width: 5px;
-}
-
-.info .swiperhos img {
-  position: relative; /* swiperhos 이미지를 부모 요소의 위치에 따라 상대적으로 배치합니다 */
-  padding-left: -50px;
+  animation: zoomInOut 1.8s ease-in-out infinite;
 }
 
 .info .swiper_002 {
+  background-color: #E2E8F9;
   position: absolute;
   background-color: transparent;
   border: none;
@@ -86,10 +71,6 @@
   src: url('../font/NotoSerif-Bold.ttf');
 }
 
-/* .info .swiper_002 .rightside .one .heytext {
-  
-} */
-
 .info .swiper_002 .rightside .one .subtext {
   width: 130px;
   font-size: 60px;
@@ -104,18 +85,3 @@
   flex-direction: column;
   margin-top: 5%;
 }
-
-/* 
-.info .swiper_002 .rightside .heytext {
-  background-color: red;
-  margin-left: 0;
-}
-
-.info .swiper_002 .rightside .subtext {
-  background-color: pink;
-  font-size: 60px;
-}
-
-.info .swiper_002 .rightside .right {
-  background-color: blue;
-} */
