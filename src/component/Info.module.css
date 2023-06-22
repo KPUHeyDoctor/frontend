@@ -8,7 +8,7 @@
   align-items: center;
 }
 
-.info .swiper_001 {
+/* .info .swiper_001 {
   position: absolute;
   background-color: transparent;
   border: none;
@@ -19,7 +19,7 @@
   margin-left: -10%;
   z-index: 1;
   animation: zoomInOut 1.8s ease-in-out infinite;
-}
+} */
 
 .info .swiper_002 {
   background-color: #E2E8F9;
