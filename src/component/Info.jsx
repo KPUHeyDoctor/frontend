@@ -4,7 +4,7 @@ import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 import styles from '../component/Info.module.css';
-import swiper_001 from '../img/swiper_001.png';
+// import swiper_001 from '../img/swiper_001.png';
 import right from '../img/right.png';
 import left from '../img/left.png';
 import heygif from '../img/heydoctor.gif';
@@ -23,9 +23,9 @@ function Info() {
       speed={1000}
     >
       <SwiperSlide>
-        <button className={styles.swiper_001}>
+        {/* <button className={styles.swiper_001}>
           <img src={swiper_001} alt="swiper_001"></img>
-        </button>
+        </button> */}
 
         <button className={styles.swiper_002}>
           <img src={left} alt='left' className={styles.left}></img>
