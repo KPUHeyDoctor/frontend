@@ -230,7 +230,7 @@ function KakaoMap() {
               }}
               
               image={{
-                src: index === state.nearestMarkerIndex ? nearMarkerImage : checkOpen(marker.time) ? "/img/start1.png" : "/img/start1.png",
+                src: index === state.nearestMarkerIndex ? nearMarkerImage : checkOpen(marker.time) ? "/img/start1.png" : "/img/end1.png",
                 size: {
                   width: index === state.nearestMarkerIndex ? 60 : 30,
                   height: index === state.nearestMarkerIndex ? 60 : 30,

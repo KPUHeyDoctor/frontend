@@ -278,7 +278,7 @@ function KakaoMap() {
               }}
               
               image={{
-                src: checkOpen(marker.time) ? "../img/start1.png" : "../img/start1.png",
+                src: checkOpen(marker.time) ? "../img/start1.png" : "../img/end1.png",
                 size: {
                   width: 30,
                   height: 30,
