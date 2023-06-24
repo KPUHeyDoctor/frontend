@@ -4,9 +4,10 @@ import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 import styles from '../component/Info.module.css';
-// import swiper_001 from '../img/swiper_001.png';
+import right01 from '../img/right01.png';
 import right from '../img/right.png';
 import left from '../img/left.png';
+import lefttext from '../img/lefttext.png';
 import heygif from '../img/heydoctor.gif';
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
@@ -23,30 +24,24 @@ function Info() {
       speed={1000}
     >
       <SwiperSlide>
-        {/* <button className={styles.swiper_001}>
-          <img src={swiper_001} alt="swiper_001"></img>
-        </button> */}
-
-        <button className={styles.swiper_002}>
-          <img src={left} alt='left' className={styles.left}></img>
-          <div className={styles.rightside}>
-            
-            <div className={styles.one}>
-              
-              <div>
-                <img src={heygif} alt='hey'className={styles.heytext}></img>
+        <button className={styles.swiper_001}>
+          <div className={styles.left01}>
+            <div className={styles.updownWrapper}>
+              <div className={styles.up}>
+                <div>
+                  <img src={heygif} alt="hey" className={styles.heytext01} />
+                </div>
+                <div className={styles.subtext01}>에서</div>
               </div>
-              <div className={styles.subtext}>에서</div>
-           
+              <div className={styles.down}>
+                <img src={lefttext} alt="lefttext" className={styles.lefttext} />
+              </div>
             </div>
-            
-            <div className={styles.two}>
-              <img src={right} alt='right' className={styles.right}></img>
-            </div>
-          
+            <img src={right01} alt="right01" className={styles.right01} />
           </div>
         </button>
       </SwiperSlide>
+
       <SwiperSlide>
         <button className={styles.swiper_002}>
           <img src={left} alt='left' className={styles.left}></img>
