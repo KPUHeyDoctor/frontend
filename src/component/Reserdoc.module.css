@@ -15,26 +15,43 @@
   justify-content: center;
   margin-top: 30px;
 }
-
-.bg .doctor {
+.doctor {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 50px;
 }
 
-.bg .pass {
-  position: absolute;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  bottom: 0;
-  right: 0;
+.doctor button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
-.bg .pass .next {
+
+.doctor button img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.doctor button:hover img {
+  transform: scale(1.1);
+}
+
+.doctorInfo {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.doctorInfo h3 {
+  font-size: 18px;
   font-weight: bold;
 }
-.bg .pass .next:hover {
-  transform: scale(1.1);
-  transition: 0.3 ease-in-out;
+
+.doctorInfo p {
+  margin-top: 10px;
+  font-size: 14px;
 }

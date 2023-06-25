@@ -1,5 +1,6 @@
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from '../component/KakaoMap.module.css';
 // import modalhospital from '../img/modalhospital.png';
@@ -199,8 +200,20 @@ function KakaoMap() {
   const [hospitalInfo, setHospitalInfo] = useState(null);     // 받아온 병원 정보를 저장할 상태
 
   function HospitalModal({ hospitalInfo, onClose }) {
-    console.log(hospitalInfo);
-    console.log(onClose);
+    const navigate = useNavigate();
+  
+    const handleReserveClick = () => {
+      const enterpriseName = hospitalInfo[0].BIZPLC_NM;
+      axios
+        .get(`api/reservation?enterpriseName=${enterpriseName}`)
+        .then((response) => {
+          const doctors = response.data;
+          navigate('/reser', { doctors });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
 
     return (
       <div className={styles.modal}>
@@ -208,7 +221,6 @@ function KakaoMap() {
           <button className={styles.close} onClick={onClose}>X</button>
 
           <span className={styles.modalname}>
-            {/* <img src={modalhospital} alt="" className={styles.modal1}/> */}
             <h1>{hospitalInfo[0].BIZPLC_NM}</h1>
           </span>
 
@@ -222,7 +234,7 @@ function KakaoMap() {
             <p>{hospitalInfo[0].LOCPLC_FACLT_TELNO_DTLS}</p>
           </span>
 
-          {/* <button className={styles.reserbtn}>예약하기</button> */}
+          <button className={styles.reserbtn} onClick={handleReserveClick}>예약하기</button>
         </div>
       </div>
     );
