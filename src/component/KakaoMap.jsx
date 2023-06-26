@@ -205,7 +205,7 @@ function KakaoMap() {
     const handleReserveClick = () => {
       const enterpriseName = hospitalInfo[0].BIZPLC_NM;
       axios
-        .get(`api/reservation?enterpriseName=${enterpriseName}`)
+        .get(`https://tukdoctor.shop/api/reservation?enterpriseName=${enterpriseName}`)
         .then((response) => {
           const doctors = response.data;
           navigate('/reser', { doctors });

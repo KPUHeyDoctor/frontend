@@ -3,16 +3,20 @@ import styles from '../component/Reserdoc.module.css';
 import doc01 from '../img/doc01.png';
 import doc02 from '../img/doc02.png';
 
-function Reserdoc({ doctors }) {
+function Reserdoc() {
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [enterpriseName, setEnterpriseName] = useState('');
 
   useEffect(() => {
-    if (doctors && doctors.length > 0) {
-      setSelectedDoctor(doctors[0]);
-      setEnterpriseName(doctors[0].BIZPLC_NM);
+    const doctors = sessionStorage.getItem('doctors');
+    if (doctors) {
+      const parsedDoctors = JSON.parse(doctors);
+      if (parsedDoctors.length > 0) {
+        setSelectedDoctor(parsedDoctors[0]);
+        setEnterpriseName(parsedDoctors[0].BIZPLC_NM);
+      }
     }
-  }, [doctors]);
+  }, []);
 
   return (
     <div className={styles.bg}>
@@ -37,7 +41,7 @@ function Reserdoc({ doctors }) {
                 <h3>{selectedDoctor.doctorName}</h3>
                 <p>진료과: {selectedDoctor.doctorMedical}</p>
                 <p>학력: {selectedDoctor.doctorField}</p>
-                <p>휴진: {selectedDoctor.doctorTime}</p>                
+                <p>휴진: {selectedDoctor.doctorTime}</p>
               </div>
             )}
           </button>
