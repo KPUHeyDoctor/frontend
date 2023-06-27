@@ -8,7 +8,7 @@ function Reserdoc() {
   const [enterpriseName, setEnterpriseName] = useState('');
 
   useEffect(() => {
-    const doctors = sessionStorage.getItem('doctors');
+    const doctors = sessionStorage.getItem('hospitalInfo');
     if (doctors) {
       const parsedDoctors = JSON.parse(doctors);
       if (parsedDoctors.length > 0) {

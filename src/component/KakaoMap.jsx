@@ -207,8 +207,8 @@ function KakaoMap() {
       axios
         .get(`https://tukdoctor.shop/api/reservation?enterpriseName=${enterpriseName}`)
         .then((response) => {
-          const doctors = response.data;
-          navigate('/reser', { doctors });
+          const hospitalInfo = response.data;
+          navigate('/reser', { hospitalInfo });
         })
         .catch((error) => {
           console.log(error);
