@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import styles from '../component/Reserdoc.module.css';
 import doc01 from '../img/doc01.png';
@@ -7,16 +8,15 @@ function Reserdoc() {
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [enterpriseName, setEnterpriseName] = useState('');
 
+  const location = useLocation();
+  const { hospitalInfo } = location.state || {};
+
   useEffect(() => {
-    const doctors = sessionStorage.getItem('hospitalInfo');
-    if (doctors) {
-      const parsedDoctors = JSON.parse(doctors);
-      if (parsedDoctors.length > 0) {
-        setSelectedDoctor(parsedDoctors[0]);
-        setEnterpriseName(parsedDoctors[0].BIZPLC_NM);
-      }
+    if (hospitalInfo && hospitalInfo.length > 0) {
+      setSelectedDoctor(hospitalInfo[0]);
+      setEnterpriseName(hospitalInfo[0].BIZPLC_NM);
     }
-  }, []);
+  }, [hospitalInfo]);
 
   return (
     <div className={styles.bg}>

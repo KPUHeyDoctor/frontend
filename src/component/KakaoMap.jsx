@@ -208,7 +208,7 @@ function KakaoMap() {
         .get(`https://tukdoctor.shop/api/reservation?enterpriseName=${enterpriseName}`)
         .then((response) => {
           const hospitalInfo = response.data;
-          navigate('/reserdoc', { hospitalInfo });
+          navigate('/reserdoc', { state: { hospitalInfo } });
         })
         .catch((error) => {
           console.log(error);
