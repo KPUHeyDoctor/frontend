@@ -219,21 +219,21 @@ function KakaoMap() {
       <div className={styles.modal}>
         <div className={styles.modalcontent}>
           <button className={styles.close} onClick={onClose}>X</button>
-
+  
           <span className={styles.modalname}>
             <h1>{hospitalInfo[0].BIZPLC_NM}</h1>
           </span>
-
+  
           <span className={styles.modaladdr}>
-            <img src={modallocation} alt="" className={styles.modal2}/>
+            <img src={modallocation} alt="" className={styles.modal2} />
             <p>{hospitalInfo[0].REFINE_ROADNM_ADDR}</p>
           </span>
-
+  
           <span className={styles.modalphone}>
-            <img src={modalphone} alt="" className={styles.modal3}/>
+            <img src={modalphone} alt="" className={styles.modal3} />
             <p>{hospitalInfo[0].LOCPLC_FACLT_TELNO_DTLS}</p>
           </span>
-
+  
           <button className={styles.reserbtn} onClick={handleReserveClick}>예약하기</button>
         </div>
       </div>
