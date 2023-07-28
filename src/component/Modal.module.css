@@ -1,0 +1,47 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  z-index: 1;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal .modalcontent .close {
+  font-size: 20px;
+  background-color: transparent;
+  border: none;
+  color: black;
+}
+
+.modal .modalcontent .modalname {
+  display: flex;
+  align-items: center;
+}
+
+/* .modal .modalcontent .modalname .modal1 {
+  margin: 5px;
+  width: 20px;
+  height: 20px;
+} */
+
+.modal .modalcontent .modaladdr {
+  display: flex;
+  align-items: center;
+}
+.modal .modalcontent .modaladdr .modal2 {
+  margin: 5px;
+
+}
+
+.modal .modalcontent .modalphone {
+  display: flex;
+  align-items: center;
+}
+.modal .modalcontent .modalphone .modal3 {
+  margin: 5px;
+
+}
