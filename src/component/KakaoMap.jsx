@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from '../component/KakaoMap.module.css';
-// import modalhospital from '../img/modalhospital.png';
 import modallocation from '../img/modallocation.png';
 import modalphone from '../img/modalphone.png';
+import HospitalModal from '../component/HospitalModal.jsx';
 
 function KakaoMap() {
   const [state, setState] = useState({
@@ -258,17 +258,17 @@ function KakaoMap() {
       >
         {!state.isLoading && (
           <MapMarker
-            position={state.center}    // 현재위치
+            position={state.center} // 현재위치
             image={{
               src: "../img/cloca.gif",
               size: {
                 width: 50,
                 height: 50,
-              }
+              },
             }}
-           />
+          />
         )}
-      
+
         {state.showMarkers &&
           state.markers.map((marker, index) => (
             <MapMarker
@@ -277,37 +277,38 @@ function KakaoMap() {
               title={marker.name}
               onClick={() => {
                 const selectedName = marker.name;
-                axios.get('https://tukdoctor.shop/api/hospitals/categories/findName', { params: { hospital_name: selectedName } })
-                  .then(response => {
+                axios
+                  .get('https://tukdoctor.shop/api/hospitals/categories/findName', {
+                    params: { hospital_name: selectedName },
+                  })
+                  .then((response) => {
                     setHospitalInfo(response.data);
-                    // console.log(hospitalInfo);
                     setShowModal(true);
-                    // console.log(showModal);
                   })
-                  .catch(error => {
-                    console.log(error)
-                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
               }}
-              
               image={{
-                src: checkOpen(marker.time) ? "../img/start1.png" : "../img/end1.png",
+                src: checkOpen(marker.time)
+                  ? "../img/start1.png"
+                  : "../img/end1.png",
                 size: {
                   width: 30,
                   height: 30,
-                }
+                },
               }}
             />
-          ))
-        }
-        {showModal && <HospitalModal hospitalInfo={hospitalInfo} onClose={closeModal} />}
+          ))}
+        {showModal && (
+          <HospitalModal
+            hospitalInfo={hospitalInfo}
+            onClose={() => setShowModal(false)}
+          />
+        )}
       </Map>
     </>
   );
-
-  function closeModal() {
-    setShowModal(false);
-    setHospitalInfo(null);
-  }
-
 }
+
 export default KakaoMap;
