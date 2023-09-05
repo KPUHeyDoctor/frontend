@@ -28,9 +28,21 @@ import ChatBonePage from './page/ChatBonePage.jsx';
 
 
 function App() {
+  
+  const [reservations, setReservations] = useState([]);
+
+  const addReservation = (message) => {
+    setReservations([...reservations, message]);
+  };
 
   return(
     <BrowserRouter>
+      <div>
+        {/* DoctorModal 컴포넌트를 렌더링하고 예약 메시지를 전달 */}
+        <DoctorModal onReservation={addReservation} />
+        {/* Mypage 컴포넌트를 렌더링하고 예약 메시지 목록을 전달 */}
+        <Mypage reservations={reservations} />
+      </div>
       <Routes>
 
         {/* <Route path="/reserdoc" element={<Resdoc />}/> */}

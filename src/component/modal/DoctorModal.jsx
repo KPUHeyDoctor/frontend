@@ -3,7 +3,7 @@ import styles from '../Reserdoc.module.css';
 import doc01 from '../../img/doc01.png';
 import doc02 from '../../img/doc02.png';
 
-function DoctorModal() {
+function DoctorModal( { reservations }) {
   
   const doctors = [
     {
@@ -26,6 +26,7 @@ function DoctorModal() {
 
     alert(message);
 
+    reservations(message);
     return message;
   };
 
