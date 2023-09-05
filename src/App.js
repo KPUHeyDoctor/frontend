@@ -8,7 +8,7 @@ import EnterLogin from './page/EnterLogin.jsx';
 import MemberJoin from './page/MemberJoin.jsx';
 import EnterJoin from './page/EnterJoin.jsx';
 
-import Resdoc from './component/Reserdoc.jsx'
+// import Resdoc from './component/Reserdoc.jsx'
 
 import ReserDoc from './page/ReserDoc.jsx';
 import ReserTime from './page/ReserTime.jsx';
@@ -19,7 +19,7 @@ import MyPage from './page/MyPage.jsx';
 // import MapCateKids from './page/MapCateKids.jsx';
 // import MapCateBone from './page/MapCateBone.jsx';
 
-import DoctorModal from './component/modal/DoctorModal.jsx'
+// import DoctorModal from './component/modal/DoctorModal.jsx'
 
 import ChatNaePage from './page/ChatNaePage.jsx';
 import ChatEbinPage from './page/ChatEbinPage.jsx';
@@ -33,8 +33,8 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-        <Route path="/reserdoc" element={<Resdoc />}/>
-        <Route path="/doctormodal" element={<DoctorModal />}/>
+        {/* <Route path="/reserdoc" element={<Resdoc />}/> */}
+        <Route path="/doctormodal" element={<ReserDoc />}/>
 
         <Route path="/" element={<MainPage />}/>
         <Route path="/EntMainPage" element={<EntMainPage/>}/>
@@ -44,7 +44,7 @@ function App() {
         <Route path="/entlog" element={<EnterLogin />}/>
         <Route path="/memjoin" element={<MemberJoin />}/>
         <Route path="/entjoin" element={<EnterJoin />}/>
-        <Route path="/reser" element={<ReserDoc />}/>
+        {/* <Route path="/reser" element={<ReserDoc />}/> */}
         <Route path="/date" element={<ReserTime />}/>
         <Route path="/mypage" element={<MyPage />}/>
 

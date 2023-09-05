@@ -1,49 +1,54 @@
-import { useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from '../Reserdoc.module.css';
 import doc01 from '../../img/doc01.png';
 import doc02 from '../../img/doc02.png';
 
 function DoctorModal() {
-  const [selectedDoctor, setSelectedDoctor] = useState(null);
-  const [enterpriseName, setEnterpriseName] = useState('');
+  const [reservations, setReservations] = useState([]);
 
-  const location = useLocation();
-  const { hospitalInfo } = location.state || {};
+  const doctors = [
+    {
+      name: '박정수',
+      specialty: '재활전문의',
+      offDay: '수요일',
+    },
+    {
+      name: '이민수',
+      specialty: '심장전문의',
+      offDay: '목요일',
+    },
+  ];
 
-  useEffect(() => {
-    if (hospitalInfo && hospitalInfo.length > 0) {
-      setSelectedDoctor(hospitalInfo[0]);
-      setEnterpriseName(hospitalInfo[0].BIZPLC_NM);
-    }
-  }, [hospitalInfo]);
+  const handleReservation = (doctor) => {
+    const currentDate = new Date().toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'long' }).replace(/\//g, '.');
+    const message = `'${currentDate} ${doctor.name}의사' 예약이 완료되었습니다.`;
+    
+    console.log(message);
+    setReservations([...reservations, message]);
+
+    alert(message);
+  };
 
   return (
     <div className={styles.bg}>
-      <h2 className={styles.hosname}>{enterpriseName}</h2>
+      <h2 className={styles.hosname}>병원</h2>
       <div className={styles.container}>
         <div className={styles.doctor}>
-          <button className={styles.doc01}>
+          <button className={styles.doc01} onClick={() => handleReservation(doctors[0])}>
             <img src={doc01} alt="의사1" />
-            {selectedDoctor && (
-              <div className={styles.doctorInfo}>
-                <h3>{selectedDoctor.doctorName}</h3>
-                <p>진료과: {selectedDoctor.doctorMedical}</p>
-                <p>학력: {selectedDoctor.doctorField}</p>
-                <p>휴진: {selectedDoctor.doctorTime}</p>
-              </div>
-            )}
+            <div className={styles.doctorInfo}>
+              <h3>{doctors[0].name}</h3>
+              <p>진료과: {doctors[0].specialty}</p>
+              <p>휴진: 매주 <b>{doctors[0].offDay}</b></p>
+            </div>
           </button>
-          <button className={styles.doc02}>
+          <button className={styles.doc02} onClick={() => handleReservation(doctors[1])}>
             <img src={doc02} alt="의사2" />
-            {selectedDoctor && (
-              <div className={styles.doctorInfo}>
-                <h3>{selectedDoctor.doctorName}</h3>
-                <p>진료과: {selectedDoctor.doctorMedical}</p>
-                <p>학력: {selectedDoctor.doctorField}</p>
-                <p>휴진: {selectedDoctor.doctorTime}</p>
-              </div>
-            )}
+            <div className={styles.doctorInfo}>
+              <h3>{doctors[1].name}</h3>
+              <p>진료과: {doctors[1].specialty}</p>
+              <p>휴진: 매주 <b>{doctors[1].offDay}</b></p>
+            </div>
           </button>
         </div>
       </div>

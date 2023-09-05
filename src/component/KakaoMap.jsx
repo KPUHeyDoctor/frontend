@@ -203,16 +203,7 @@ function KakaoMap() {
     const navigate = useNavigate();
   
     const handleReserveClick = () => {
-      const enterpriseName = hospitalInfo[0].BIZPLC_NM;
-      axios
-        .get(`https://tukdoctor.shop/api/reservation?enterpriseName=${enterpriseName}`)
-        .then((response) => {
-          const hospitalInfo = response.data;
-          navigate('/doctormodal', { state: { hospitalInfo } });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          navigate('/doctormodal');
     };
 
     return (

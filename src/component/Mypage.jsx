@@ -1,25 +1,35 @@
+import React, { useState } from 'react';
 import styles from '../component/Mypage.module.css';
 import mypage from '../img/mypage.png';
 
+import DoctorModal from '../component/modal/DoctorModal.jsx';
+
 function Mypage() {
-  return(
+  const [reservations, setReservations] = useState([]);
+  
+  const addReservation = (message) => {
+    setReservations([...reservations, message]);
+  };
+
+  return (
     <>
-    <div className={styles.bg}>
-      <div className={styles.mypage}>
-        <img src={mypage} alt="마이페이지"></img>
+      <div className={styles.bg}>
+        <div className={styles.mypage}>
+          <img src={mypage} alt="마이페이지" />
+        </div>
+        <div className={styles.list}>
+          <ul>
+            {reservations.map((reservation, index) => (
+              <li key={index}>
+                <p>{reservation}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <DoctorModal onReservation={addReservation} />
       </div>
-      <div className={styles.list}>
-        <span className={styles.myreser}>
-          예약 내역
-        </span>
-        <span className={styles.myinfo}>
-          내 정보
-        </span>
-      </div>
-      
-    </div>
     </>
   );
-}
+  }
 
 export default Mypage;

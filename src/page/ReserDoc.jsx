@@ -1,11 +1,11 @@
 import Header from '../component/Header';
-import Reserdoc from '../component/Reserdoc';
+import DoctorModal from './../component/modal/DoctorModal';
 
 function ReserDoc() {
   return(
     <div>
       <Header />
-      <Reserdoc />
+      <DoctorModal />
     </div>
   );
 }
