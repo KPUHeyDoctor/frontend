@@ -11,6 +11,12 @@ function Mypage() {
     setReservations([...reservations, message]);
   };
 
+  const reservationMessage = DoctorModal();
+
+  if (reservationMessage) {
+    addReservation(reservationMessage);
+  }
+
   return (
     <>
       <div className={styles.bg}>
@@ -26,7 +32,6 @@ function Mypage() {
             ))}
           </ul>
         </div>
-        <DoctorModal onReservation={addReservation} />
       </div>
     </>
   );

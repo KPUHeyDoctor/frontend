@@ -25,9 +25,10 @@ function DoctorModal({ onReservation }) {
     
     console.log(message);
     setReservations([...reservations, message]);
-    onReservation(message);
 
     alert(message);
+
+    return message;
   };
 
   return (
