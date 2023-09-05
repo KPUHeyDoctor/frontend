@@ -3,19 +3,19 @@ import styles from '../Reserdoc.module.css';
 import doc01 from '../../img/doc01.png';
 import doc02 from '../../img/doc02.png';
 
-function DoctorModal() {
+function DoctorModal({ onReservation }) {
   const [reservations, setReservations] = useState([]);
 
   const doctors = [
     {
       name: '박정수',
       specialty: '재활전문의',
-      offDay: '수요일',
+      offDay: '월요일',
     },
     {
       name: '이민수',
       specialty: '심장전문의',
-      offDay: '목요일',
+      offDay: '수요일',
     },
   ];
 
@@ -25,6 +25,7 @@ function DoctorModal() {
     
     console.log(message);
     setReservations([...reservations, message]);
+    onReservation(message);
 
     alert(message);
   };
