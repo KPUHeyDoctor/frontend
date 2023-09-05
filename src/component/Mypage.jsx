@@ -2,21 +2,8 @@ import React, { useState } from 'react';
 import styles from '../component/Mypage.module.css';
 import mypage from '../img/mypage.png';
 
-import DoctorModal from '../component/modal/DoctorModal.jsx';
-
-function Mypage() {
-  const [reservations, setReservations] = useState([]);
+function Mypage({ reservations }) {
   
-  const addReservation = (message) => {
-    setReservations([...reservations, message]);
-  };
-
-  const reservationMessage = DoctorModal();
-
-  if (reservationMessage) {
-    addReservation(reservationMessage);
-  }
-
   return (
     <>
       <div className={styles.bg}>
@@ -26,9 +13,7 @@ function Mypage() {
         <div className={styles.list}>
           <ul>
             {reservations.map((reservation, index) => (
-              <li key={index}>
-                <p>{reservation}</p>
-              </li>
+              <li key={index}>{reservation}</li>
             ))}
           </ul>
         </div>

@@ -3,9 +3,8 @@ import styles from '../Reserdoc.module.css';
 import doc01 from '../../img/doc01.png';
 import doc02 from '../../img/doc02.png';
 
-function DoctorModal({ onReservation }) {
-  const [reservations, setReservations] = useState([]);
-
+function DoctorModal() {
+  
   const doctors = [
     {
       name: '박정수',
@@ -24,7 +23,6 @@ function DoctorModal({ onReservation }) {
     const message = `'${currentDate} ${doctor.name}의사' 예약이 완료되었습니다.`;
     
     console.log(message);
-    setReservations([...reservations, message]);
 
     alert(message);
 
