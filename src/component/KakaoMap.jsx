@@ -202,8 +202,16 @@ function KakaoMap() {
   function HospitalModal({ hospitalInfo, onClose }) {
     const navigate = useNavigate();
   
+    const [ doctorData, setDoctorData ] = useState([]);
+
     const handleReserveClick = () => {
-          navigate('/doctormodal');
+      axios.get('https://tukdoctor.shop/api/reservation?enterpriseName=한사랑요양병원')
+        .then(response => {
+          setDoctorData(response.data);
+          navigate('/doctormodal', { state: { doctorData: response.data}});
+        }).catch(err => {
+          console.log(err);
+        })
     };
 
     return (
