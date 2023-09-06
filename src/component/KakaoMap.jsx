@@ -280,9 +280,9 @@ function KakaoMap() {
               position={marker}
               title={marker.name}
               onClick={() => {
-                const selectedName = marker.name;
+                const hospitalName = marker.name;
                 selectedName(selectedName);
-                axios.get('https://tukdoctor.shop/api/hospitals/categories/findName', { params: { hospital_name: selectedName } })
+                axios.get('https://tukdoctor.shop/api/hospitals/categories/findName', { params: { hospital_name: hospitalName } })
                   .then(response => {
                     setHospitalInfo(response.data);
                     // console.log(hospitalInfo);
