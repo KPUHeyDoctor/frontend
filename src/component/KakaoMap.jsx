@@ -281,7 +281,7 @@ function KakaoMap() {
               title={marker.name}
               onClick={() => {
                 const hospitalName = marker.name;
-                selectedName(selectedName);
+                selectedName(hospitalName);
                 axios.get('https://tukdoctor.shop/api/hospitals/categories/findName', { params: { hospital_name: hospitalName } })
                   .then(response => {
                     setHospitalInfo(response.data);
@@ -304,7 +304,7 @@ function KakaoMap() {
             />
           ))
         }
-        {showModal && <HospitalModal hospitalInfo={hospitalInfo} selectedName={selectedName} onClose={closeModal} />}
+        {showModal && <HospitalModal hospitalInfo={hospitalInfo} onClose={closeModal} />}
       </Map>
     </>
   );
