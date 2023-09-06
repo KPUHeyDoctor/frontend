@@ -211,6 +211,7 @@ function KakaoMap() {
           .then(response => {
             setDoctorData(response.data);
             navigate('/doctormodal', { state: { doctorData: response.data}});
+            console.log(selectedName);
           }).catch(err => {
             console.log(err);
           })
