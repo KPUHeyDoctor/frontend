@@ -31,8 +31,8 @@
 
 .doctor button img {
   width: 150px;
-  /* height: 150px; */
-  /* border-radius: 50%; */
+  /* height: 150px;
+  border-radius: 50%; */
   object-fit: cover;
   transition: transform 0.3s ease-in-out;
 }

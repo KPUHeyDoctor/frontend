@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from '../Reserdoc.module.css';
-import doc01 from '../../img/doctorM.png';
-import doc02 from '../../img/doctorF.png';
+import doc01 from '../../img/doctorF.png';
+import doc02 from '../../img/doctorM.png';
 
 function DoctorModal() {
   const navigate = useNavigate();
