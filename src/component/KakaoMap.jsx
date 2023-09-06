@@ -205,7 +205,7 @@ function KakaoMap() {
     const [ doctorData, setDoctorData ] = useState([]);
 
     const handleReserveClick = () => {
-      axios.get('https://tukdoctor.shop/api/reservation?enterpriseName=${selectedName}')
+      axios.get(`https://tukdoctor.shop/api/reservation?enterpriseName=${selectedName}`)
         .then(response => {
           setDoctorData(response.data);
           navigate('/doctormodal', { state: { doctorData: response.data}});
