@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
-function TimeModal({ doctorData }) {
+function TimeModal() {
+  const location = useLocation();
+  const doctorData = location.state.doctorData;
 
   const availableTimes = [
     '09:00 AM',

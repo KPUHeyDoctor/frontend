@@ -15,7 +15,7 @@ function DoctorModal() {
 
   return (
     <div className={styles.bg}>
-      <h2 className={styles.hosname}>병원</h2>
+      <h2 className={styles.hosname}>{doctorData.selectedName}</h2>
       <div className={styles.container}>
         <div className={styles.doctor}>
           {doctorData.map((doctor, index) => (
