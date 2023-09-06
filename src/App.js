@@ -19,7 +19,7 @@ import MyPage from './page/MyPage.jsx';
 // import MapCateKids from './page/MapCateKids.jsx';
 // import MapCateBone from './page/MapCateBone.jsx';
 
-import DoctorModal from './component/modal/DoctorModal.jsx'
+import DoctorModal from './page/ReserDoc.jsx'
 
 import ChatNaePage from './page/ChatNaePage.jsx';
 import ChatEbinPage from './page/ChatEbinPage.jsx';
