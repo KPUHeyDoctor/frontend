@@ -202,9 +202,7 @@ function KakaoMap() {
 
   function HospitalModal({ hospitalInfo, onClose }) {
     const navigate = useNavigate();
-  
     const [ doctorData, setDoctorData ] = useState([]);
-    // const [selectedName, setSelectedName] = useState(null);
 
     const handleReserveClick = () => {
       if (selectedName) {
@@ -281,7 +279,7 @@ function KakaoMap() {
               title={marker.name}
               onClick={() => {
                 const hospitalName = marker.name;
-                selectedName(hospitalName);
+                setSelectedName(hospitalName);
                 axios.get('https://tukdoctor.shop/api/hospitals/categories/findName', { params: { hospital_name: hospitalName } })
                   .then(response => {
                     setHospitalInfo(response.data);
