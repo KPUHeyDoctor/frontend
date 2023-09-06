@@ -58,59 +58,59 @@ function TimeModal() {
   
   return (
     <div className={styles.bg}>
-      <h2 className={styles.hosname}>{doctorData.selectedName}</h2>
-      <div className={styles.container}>
-        <div className={styles.doctor}>
-          <h3 className={styles.doctortitle}>예약 가능한 시간</h3>
-          <ul className={styles.ull}>
-            <h4>오전</h4>
-            {availableTimes1.map((time, index) => (
-              <li
-                key={index}
-                onClick={() => handleTimeClick(time)}
-                className={`${styles.timeSlot} ${
-                  selectedTime === time ? styles.selectedTime : ''
-                }`}
-              >
-                {time} {selectedTime === time}
-              </li>
-            ))}
-            <br /><br /><br /><br />
-            <h4>오후</h4>
-            {availableTimes2.map((time, index) => (
-              <li
-                key={index}
-                onClick={() => handleTimeClick(time)}
-                className={`${styles.timeSlot} ${
-                  selectedTime === time ? styles.selectedTime : ''
-                }`}
-              >
-                {time} {selectedTime === time}
-              </li>
-            ))}
-            <br /><br />
-            {availableTimes3.map((time, index) => (
-              <li
-                key={index}
-                onClick={() => handleTimeClick(time)}
-                className={`${styles.timeSlot} ${
-                  selectedTime === time ? styles.selectedTime : ''
-                }`}
-              >
-                {time} {selectedTime === time}
-              </li>
-            ))}
-          </ul>
-          {selectedTime && (
-            <div className={styles.center}>
-              <button className={styles.buton} onClick={handleReservation}>
-                예약하기
-              </button>
-            </div>
-          )}
-        </div>
+    <h2 className={styles.hosname}>{doctorData.selectedName}</h2>
+    <div className={styles.container}>
+      <div className={styles.doctor}>
+        <h3>예약 가능한 시간</h3>
+        <ul className={styles.ull}>
+          <h4>오전</h4>
+          {availableTimes1.map((time, index) => (
+            <li
+              key={index}
+              onClick={() => handleTimeClick(time)}
+              className={`${styles.timeSlot} ${
+                selectedTime === time ? styles.selectedTime : ''
+              }`}
+            >
+              {time} {selectedTime === time}
+            </li>
+          ))}
+          <br /><br />
+          <h4>오후</h4>
+          {availableTimes2.map((time, index) => (
+            <li
+              key={index}
+              onClick={() => handleTimeClick(time)}
+              className={`${styles.timeSlot} ${
+                selectedTime === time ? styles.selectedTime : ''
+              }`}
+            >
+              {time} {selectedTime === time}
+            </li>
+          ))}
+          <br /><br />
+          {availableTimes3.map((time, index) => (
+            <li
+              key={index}
+              onClick={() => handleTimeClick(time)}
+              className={`${styles.timeSlot} ${
+                selectedTime === time ? styles.selectedTime : ''
+              }`}
+            >
+              {time} {selectedTime === time}
+            </li>
+          ))}
+        </ul>
+        {selectedTime && (
+          <div className={styles.center}>
+            <button className={styles.buton} onClick={handleReservation}>
+              예약하기
+            </button>
+          </div>
+        )}
       </div>
     </div>
+  </div>
   );
 }
 
