@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+
 import styles from '../component/Mypage.module.css';
 import mypage from '../img/mypage.png';
 

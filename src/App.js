@@ -8,7 +8,7 @@ import EnterLogin from './page/EnterLogin.jsx';
 import MemberJoin from './page/MemberJoin.jsx';
 import EnterJoin from './page/EnterJoin.jsx';
 
-// import Resdoc from './component/Reserdoc.jsx'
+import Resdoc from './component/Reserdoc.jsx'
 
 import ReserDoc from './page/ReserDoc.jsx';
 import ReserTime from './page/ReserTime.jsx';
@@ -19,7 +19,7 @@ import MyPage from './page/MyPage.jsx';
 // import MapCateKids from './page/MapCateKids.jsx';
 // import MapCateBone from './page/MapCateBone.jsx';
 
-// import DoctorModal from './component/modal/DoctorModal.jsx'
+import DoctorModal from './component/modal/DoctorModal.jsx'
 
 import ChatNaePage from './page/ChatNaePage.jsx';
 import ChatEbinPage from './page/ChatEbinPage.jsx';
@@ -28,25 +28,13 @@ import ChatBonePage from './page/ChatBonePage.jsx';
 
 
 function App() {
-  
-  const [reservations, setReservations] = useState([]);
-
-  const addReservation = (message) => {
-    setReservations([...reservations, message]);
-  };
 
   return(
     <BrowserRouter>
-      <div>
-        {/* DoctorModal 컴포넌트를 렌더링하고 예약 메시지를 전달 */}
-        <DoctorModal onReservation={addReservation} />
-        {/* Mypage 컴포넌트를 렌더링하고 예약 메시지 목록을 전달 */}
-        <Mypage reservations={reservations} />
-      </div>
       <Routes>
 
-        {/* <Route path="/reserdoc" element={<Resdoc />}/> */}
-        <Route path="/doctormodal" element={<ReserDoc />}/>
+        <Route path="/reserdoc" element={<Resdoc />}/>
+        <Route path="/doctormodal" element={<DoctorModal />}/>
 
         <Route path="/" element={<MainPage />}/>
         <Route path="/EntMainPage" element={<EntMainPage/>}/>
@@ -56,7 +44,7 @@ function App() {
         <Route path="/entlog" element={<EnterLogin />}/>
         <Route path="/memjoin" element={<MemberJoin />}/>
         <Route path="/entjoin" element={<EnterJoin />}/>
-        {/* <Route path="/reser" element={<ReserDoc />}/> */}
+        <Route path="/reser" element={<ReserDoc />}/>
         <Route path="/date" element={<ReserTime />}/>
         <Route path="/mypage" element={<MyPage />}/>
 
