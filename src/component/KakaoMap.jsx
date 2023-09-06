@@ -203,15 +203,18 @@ function KakaoMap() {
     const navigate = useNavigate();
   
     const [ doctorData, setDoctorData ] = useState([]);
+    const [selectedName, setSelectedName] = useState(null);
 
     const handleReserveClick = () => {
-      axios.get(`https://tukdoctor.shop/api/reservation?enterpriseName=${selectedName}`)
-        .then(response => {
-          setDoctorData(response.data);
-          navigate('/doctormodal', { state: { doctorData: response.data}});
-        }).catch(err => {
-          console.log(err);
-        })
+      if (selectedName) {
+        axios.get(`https://tukdoctor.shop/api/reservation?enterpriseName=${selectedName}`)
+          .then(response => {
+            setDoctorData(response.data);
+            navigate('/doctormodal', { state: { doctorData: response.data}});
+          }).catch(err => {
+            console.log(err);
+          })
+      }
     };
 
     return (
