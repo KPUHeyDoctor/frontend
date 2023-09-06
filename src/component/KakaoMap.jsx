@@ -8,6 +8,7 @@ import modallocation from '../img/modallocation.png';
 import modalphone from '../img/modalphone.png';
 
 function KakaoMap() {
+  const [selectedName, setSelectedName] = useState(null);
   const [state, setState] = useState({
     center: {
       lat: 37.450701,
@@ -302,7 +303,7 @@ function KakaoMap() {
             />
           ))
         }
-        {showModal && <HospitalModal hospitalInfo={hospitalInfo} onClose={closeModal} />}
+        {showModal && <HospitalModal hospitalInfo={hospitalInfo} selectedName={selectedName} onClose={closeModal} />}
       </Map>
     </>
   );
