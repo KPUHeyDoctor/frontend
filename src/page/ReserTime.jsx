@@ -1,11 +1,11 @@
 import Header from '../component/Header';
-import Resertime from '../component/Resertime';
+import TimeModal from '../component/modal/TimeModal';
 
 function ReserTime() {
   return(
     <div>
       <Header />
-      <Resertime />
+      <TimeModal />
     </div>
   );
 }

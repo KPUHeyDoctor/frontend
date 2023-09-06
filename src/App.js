@@ -20,6 +20,7 @@ import MyPage from './page/MyPage.jsx';
 // import MapCateBone from './page/MapCateBone.jsx';
 
 import DoctorModal from './page/ReserDoc.jsx'
+import TimeModal from './page/ReserTime.jsx';
 
 import ChatNaePage from './page/ChatNaePage.jsx';
 import ChatEbinPage from './page/ChatEbinPage.jsx';
@@ -35,6 +36,7 @@ function App() {
 
         <Route path="/reserdoc" element={<Resdoc />}/>
         <Route path="/doctormodal" element={<DoctorModal />}/>
+        <Route path="/timemodal" element={<TimeModal />} />
 
         <Route path="/" element={<MainPage />}/>
         <Route path="/EntMainPage" element={<EntMainPage/>}/>
