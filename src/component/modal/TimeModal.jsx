@@ -50,7 +50,7 @@ function TimeModal() {
     }
 
     const requestData = {
-      doctorName: doctorData.doctorName,
+      doctorname: doctorData.doctorName,
       username: userName,
       historyTime: selectedTime,
     };
