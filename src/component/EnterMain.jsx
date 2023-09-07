@@ -7,7 +7,7 @@ function EnterMain() {
 
   useEffect(() => {
     if (enterpriseName) {
-      axios.get('https://tukdoctor.shop/api.example.com/api/history/enterprise', {
+      axios.get('https://tukdoctor.shop/api/history/enterprise', {
         params: {
           enterpriseName: enterpriseName
         }
