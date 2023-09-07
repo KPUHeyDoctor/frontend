@@ -55,29 +55,27 @@ function TimeModal() {
     //   historyTime: selectedTime,
     // };
   
-  //   axios.post('https://tukdoctor.shop/api/reservation/doctor/detail', requestData)
-  //   .then((response) => {
-  //     // const count = response.data;
-      
-  
-  //     const reservation = {
-  //       doctorName: doctorData.doctorName,
-  //       selectedTime: selectedTime,
-  //       currentDate: currentDate,
-  //       historyBoolean: true, // 예약 확인 여부
-  //       username: userName,
-  //     };
-  
-  //     saveReservationToLocalStorage(reservation);
-  
-  //     window.location.reload();
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
-  
-  const message = `${userName}님! \n'${currentDate} ${selectedTime} ${doctorData.doctorName}의사' 예약이 완료되었습니다.`;
+    // axios.post('https://tukdoctor.shop/api/reservation/doctor/detail', requestData)
+    // .then((response) => {
+      // const count = response.data;
+      const message = `${userName}님! \n'${currentDate} ${selectedTime} ${doctorData.doctorName}의사' 예약이 완료되었습니다.`;
       alert(message);
+  
+      const reservation = {
+        doctorName: doctorData.doctorName,
+        selectedTime: selectedTime,
+        currentDate: currentDate,
+        historyBoolean: true, // 예약 확인 여부
+        username: userName,
+      };
+  
+      saveReservationToLocalStorage(reservation);
+  
+      window.location.reload();
+    // })
+    // .catch((error) => {
+    //   console.error(error);
+    // });
   };
   
   const saveReservationToLocalStorage = (reservation) => {
