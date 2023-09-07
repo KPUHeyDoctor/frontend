@@ -84,7 +84,7 @@ function TimeModal() {
     localStorage.setItem('reservations', JSON.stringify(storedReservations));
   };
 
-  const isTimeDisabled = (time, availableTimes) => !availableTimes.includes(time);  
+  const isTimeDisabled = (time, availableTimes) => !availableTimes4.includes(time);  
   
   return (
     <div className={styles.bg}>
@@ -113,7 +113,7 @@ function TimeModal() {
               onClick={() => handleTimeClick(time)}
               className={`${styles.timeSlot} ${
                 selectedTime === time ? styles.selectedTime : ''
-              } ${isTimeDisabled(time, availableTimes1) ? styles.disabledTimeSlot : ''}`}
+              } ${isTimeDisabled(time, availableTimes2) ? styles.disabledTimeSlot : ''}`}
             >
               {time}
             </li>
@@ -124,7 +124,7 @@ function TimeModal() {
               onClick={() => handleTimeClick(time)}
               className={`${styles.timeSlot} ${
                 selectedTime === time ? styles.selectedTime : ''
-              } ${isTimeDisabled(time, availableTimes1) ? styles.disabledTimeSlot : ''}`}
+              } ${isTimeDisabled(time, availableTimes3) ? styles.disabledTimeSlot : ''}`}
             >
               {time}
             </li>
