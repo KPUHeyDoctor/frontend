@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from '../Resertime.module.css';
 import { useLocation } from 'react-router-dom';
-import axios from 'axios';
 
 function TimeModal() {
   const location = useLocation();
@@ -31,46 +30,32 @@ function TimeModal() {
   };
 
   const handleReservation = () => {
-    const currentDate = new Date().toLocaleDateString('ko-KR',
-    {
+    const currentDate = new Date().toLocaleDateString('ko-KR', {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
       weekday: 'long'
     }).replace(/\//g, '.');
 
-    const requestData = {
-      doctorName: doctorData.doctorName,
-      username: userName,
+    const message = `${userName}님! \n'${currentDate} ${selectedTime} ${doctorData.doctorName}의사' 예약이 완료되었습니다.`;
+    alert(message);
+
+    const reservation = {
+      doctorname: doctorData.doctorName,
       historyTime: selectedTime,
+      historyBoolean: true,
     };
 
-    const saveReservationToLocalStorage = (reservation) => {
-      const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
-      storedReservations.push(reservation);
-      localStorage.setItem('reservations', JSON.stringify(storedReservations));
-    };
+    saveReservationToLocalStorage(reservation);
 
-    axios.post('https://tukdoctor.shop/api/reservation/doctor/detail', requestData)
-    .then((response) => {
-      const { count, estimatedWaitTime } = response.data;
-      const message = `${userName}님! \n'${currentDate} ${selectedTime} ${doctorData.doctorName}의사' 예약이 완료되었습니다. \n예약 대기인원 : ${count}명, 예상 대기 시간: ${estimatedWaitTime}분`;
-      alert(message);
-      
-      const reservation = {
-        doctorname: doctorData.doctorName,
-        historyTime: selectedTime,
-        historyBoolean: true, // 예약 확인 여부
-      };
-
-      saveReservationToLocalStorage(reservation);
-
-      window.location.reload();
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-};
+    window.location.reload();
+  };
+  
+  const saveReservationToLocalStorage = (reservation) => {
+    const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
+    storedReservations.push(reservation);
+    localStorage.setItem('reservations', JSON.stringify(storedReservations));
+  };
   
   
   return (

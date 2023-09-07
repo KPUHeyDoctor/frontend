@@ -15,7 +15,7 @@ function Mypage() {
 
   useEffect(() => {
     const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
-    setReservations(storedReservations);
+    setReservations(storedReservations.reverse());
   }, []);
 
   return (
