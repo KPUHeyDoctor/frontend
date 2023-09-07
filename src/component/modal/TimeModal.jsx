@@ -45,16 +45,33 @@ function TimeModal() {
       historyTime: selectedTime,
     };
 
+    const saveReservationToLocalStorage = (reservation) => {
+      const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
+      storedReservations.push(reservation);
+      localStorage.setItem('reservations', JSON.stringify(storedReservations));
+    };
+
     axios.post('https://tukdoctor.shop/api/reservation/doctor/detail', requestData)
-      .then((response) => {
-        const { count, estimatedWaitTime } = response.data;
-        const message = `${userName}님! \n'${currentDate} ${selectedTime} ${doctorData.doctorName}의사' 예약이 완료되었습니다. \n예약 대기인원 : ${count}명, 예상 대기 시간: ${estimatedWaitTime}분`;
-        alert(message);
-      })
-      .catch((error) => {
-        console.error('API 요청 에러:', error);
-      });
-  };
+    .then((response) => {
+      const { count, estimatedWaitTime } = response.data;
+      const message = `${userName}님! \n'${currentDate} ${selectedTime} ${doctorData.doctorName}의사' 예약이 완료되었습니다. \n예약 대기인원 : ${count}명, 예상 대기 시간: ${estimatedWaitTime}분`;
+      alert(message);
+      
+      const reservation = {
+        doctorname: doctorData.doctorName,
+        historyTime: selectedTime,
+        historyBoolean: true, // 예약 확인 여부
+      };
+
+      saveReservationToLocalStorage(reservation);
+
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+  
   
   return (
     <div className={styles.bg}>

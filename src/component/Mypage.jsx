@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../component/Mypage.module.css';
 import mypage from '../img/mypage.png';
-import axios from 'axios';
 
 function Mypage() {
   const [reservations, setReservations] = useState([]);
@@ -15,17 +14,9 @@ function Mypage() {
   }, []);
 
   useEffect(() => {
-    if (userName) {
-      axios.get(`api/history/user?userName=${userName}`)
-        .then((response) => {
-          const sortedReservations = response.data.reverse();
-          setReservations(sortedReservations);
-        })
-        .catch((error) => {
-          console.error('API 요청 에러:', error);
-        });
-    }
-  }, [userName]);
+    const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
+    setReservations(storedReservations);
+  }, []);
 
   return (
     <>
