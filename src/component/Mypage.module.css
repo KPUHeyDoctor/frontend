@@ -28,3 +28,12 @@
   text-align: center;
   font-size: 16px;
 }
+
+.list {
+  list-style: none;
+}
+
+.reservationItem {
+  margin-bottom: 10px;
+  padding: 10px;
+}
