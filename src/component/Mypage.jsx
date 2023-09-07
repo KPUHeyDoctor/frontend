@@ -17,7 +17,7 @@ function Mypage() {
     const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
 
     const userReservations = storedReservations.filter(reservation => reservation.username === userName);
-    setReservations(storedReservations.reverse());
+    setReservations(userReservations.reverse());
   }, []);
 
   return (
