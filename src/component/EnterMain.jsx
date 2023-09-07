@@ -31,8 +31,8 @@ function EnterMain() {
           <ul>
             {dataList.map((data, index) => (
               <li key={index}>
-                <p>사용자: {data.username}</p>
-                <p>의사: {data.doctorname}</p>
+                <p>사용자: {data.userName}</p>
+                <p>의사: {data.doctorName}</p>
                 <p>예약 시간: {data.historyTime}</p>
               </li>
             ))}
