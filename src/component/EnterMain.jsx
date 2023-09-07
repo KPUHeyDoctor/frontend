@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import styles from '../component/EnterMain.module.css'
 
 function EnterMain() {
   const [dataList, setDataList] = useState([]);
@@ -32,7 +33,7 @@ function EnterMain() {
           <h1>{enterpriseName} 예약내역</h1>
           <ul>
             {dataList.map((data, index) => (
-              <li>
+              <li className={styles.enterlist}>
                 <p>사용자: {data.username}</p>
                 <p>의사: {data.doctorname}</p>
                 <p>예약 시간: {data.historyTime}</p>
