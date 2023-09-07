@@ -99,6 +99,8 @@ function TimeModal() {
               onClick={() => handleTimeClick(time)}
               className={`${styles.timeSlot} ${
                 selectedTime === time ? styles.selectedTime : ''
+              } ${
+                availableTimes1.includes(time) ? '' : styles.disabledTimeSlot
               }`}
             >
               {time}
@@ -112,6 +114,8 @@ function TimeModal() {
               onClick={() => handleTimeClick(time)}
               className={`${styles.timeSlot} ${
                 selectedTime === time ? styles.selectedTime : ''
+              } ${
+                availableTimes1.includes(time) ? '' : styles.disabledTimeSlot
               }`}
             >
               {time}
@@ -123,6 +127,8 @@ function TimeModal() {
               onClick={() => handleTimeClick(time)}
               className={`${styles.timeSlot} ${
                 selectedTime === time ? styles.selectedTime : ''
+              } ${
+                availableTimes1.includes(time) ? '' : styles.disabledTimeSlot
               }`}
             >
               {time}
