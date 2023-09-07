@@ -23,7 +23,14 @@ function TimeModal() {
 
   const availableTimes3 = [
     '16:00', '16:30',
-    '17:00', '17:30'
+    '17:00', '17:30',
+    '18:00', '18:30',
+  ];
+
+  const availableTimes4 = [
+    '20:00', '20:30',
+    '21:00', '21:30',
+    '22:00', '22:30',
   ];
 
   const handleTimeClick = (time) => {
@@ -37,7 +44,11 @@ function TimeModal() {
       day: '2-digit',
       weekday: 'long'
     }).replace(/\//g, '.');
-    
+
+    if (!availableTimes4.includes(selectedTime)) {
+      return;
+    }
+
     const requestData = {
       doctorName: doctorData.doctorName,
       username: userName,
@@ -90,7 +101,7 @@ function TimeModal() {
                 selectedTime === time ? styles.selectedTime : ''
               }`}
             >
-              {time} {selectedTime === time}
+              {time}
             </li>
           ))}
           <br /><br />
@@ -103,10 +114,9 @@ function TimeModal() {
                 selectedTime === time ? styles.selectedTime : ''
               }`}
             >
-              {time} {selectedTime === time}
+              {time}
             </li>
           ))}
-          <br /><br />
           {availableTimes3.map((time, index) => (
             <li
               key={index}
@@ -115,7 +125,20 @@ function TimeModal() {
                 selectedTime === time ? styles.selectedTime : ''
               }`}
             >
-              {time} {selectedTime === time}
+              {time}
+            </li>
+          ))}
+          <br /><br />
+          <h4>야간</h4>
+          {availableTimes4.map((time, index) => (
+            <li
+              key={index}
+              onClick={() => handleTimeClick(time)}
+              className={`${styles.timeSlot} ${
+                selectedTime === time ? styles.selectedTime : ''
+              }`}
+            >
+              {time}
             </li>
           ))}
         </ul>
