@@ -115,7 +115,7 @@ function TimeModal() {
               className={`${styles.timeSlot} ${
                 selectedTime === time ? styles.selectedTime : ''
               } ${
-                availableTimes1.includes(time) ? '' : styles.disabledTimeSlot
+                availableTimes2.includes(time) ? '' : styles.disabledTimeSlot
               }`}
             >
               {time}
@@ -128,7 +128,7 @@ function TimeModal() {
               className={`${styles.timeSlot} ${
                 selectedTime === time ? styles.selectedTime : ''
               } ${
-                availableTimes1.includes(time) ? '' : styles.disabledTimeSlot
+                availableTimes3.includes(time) ? '' : styles.disabledTimeSlot
               }`}
             >
               {time}
