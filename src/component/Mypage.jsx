@@ -15,8 +15,11 @@ function Mypage() {
 
   useEffect(() => {
     const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
+    console.log('전체 예약 데이터:', storedReservations);
 
     const userReservations = storedReservations.filter(reservation => reservation.username === userName);
+    console.log('사용자 예약 데이터:', userReservations);
+    
     setReservations(userReservations.reverse());
   }, []);
 

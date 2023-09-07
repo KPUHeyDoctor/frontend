@@ -37,7 +37,7 @@ function TimeModal() {
       day: '2-digit',
       weekday: 'long'
     }).replace(/\//g, '.');
-  
+    
     const requestData = {
       doctorName: doctorData.doctorName,
       username: userName,
@@ -46,6 +46,7 @@ function TimeModal() {
   
     axios.post('https://tukdoctor.shop/api/reservation/doctor/detail', requestData)
     .then(() => {
+      // const { count, estimatesWaitTime } = response.data;
       const message = `${userName}님! \n'${currentDate} ${selectedTime} ${doctorData.doctorName}의사' 예약이 완료되었습니다.`;
       alert(message);
   
@@ -54,6 +55,7 @@ function TimeModal() {
         selectedTime: selectedTime,
         currentDate: currentDate,
         historyBoolean: true, // 예약 확인 여부
+        username: userName,
       };
   
       saveReservationToLocalStorage(reservation);
