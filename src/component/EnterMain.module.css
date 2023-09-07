@@ -1,3 +1,10 @@
+.enterdiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 300px;
+}
+
 .enterlist {
   display: flex;
   flex-direction: column;
