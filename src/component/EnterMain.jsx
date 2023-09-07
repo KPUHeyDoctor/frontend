@@ -7,7 +7,7 @@ function EnterMain() {
 
   useEffect(() => {
     if (enterpriseName) {
-      axios.get('https://api.example.com/api/history/enterprise', {
+      axios.get('https://tukdoctor.shop/api.example.com/api/history/enterprise', {
         params: {
           enterpriseName: enterpriseName
         }
@@ -32,6 +32,7 @@ function EnterMain() {
             {dataList.map((data, index) => (
               <li key={index}>
                 <p>사용자: {data.username}</p>
+                <p>의사: {data.doctorname}</p>
                 <p>예약 시간: {data.historyTime}</p>
               </li>
             ))}
