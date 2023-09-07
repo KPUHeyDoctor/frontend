@@ -56,9 +56,9 @@ function TimeModal() {
     };
   
     axios.post('https://tukdoctor.shop/api/reservation/doctor/detail', requestData)
-    .then(() => {
-      // const { count, estimatesWaitTime } = response.data;
-      const message = `${userName}님! \n'${currentDate} ${selectedTime} ${doctorData.doctorName}의사' 예약이 완료되었습니다.`;
+    .then((response) => {
+      const { count } = response.data;
+      const message = `${userName}님! \n'${currentDate} ${selectedTime} ${doctorData.doctorName}의사' 예약이 완료되었습니다. \n예약인원: ${count} 대기시간: ${count*10}분`;
       alert(message);
   
       const reservation = {
@@ -83,7 +83,8 @@ function TimeModal() {
     storedReservations.push(reservation);
     localStorage.setItem('reservations', JSON.stringify(storedReservations));
   };
-  
+
+  const isTimeDisabled = (time, availableTimes) => !availableTimes.includes(time);  
   
   return (
     <div className={styles.bg}>
@@ -99,9 +100,7 @@ function TimeModal() {
               onClick={() => handleTimeClick(time)}
               className={`${styles.timeSlot} ${
                 selectedTime === time ? styles.selectedTime : ''
-              } ${
-                availableTimes1.includes(time) ? '' : styles.disabledTimeSlot
-              }`}
+              } ${isTimeDisabled(time, availableTimes1) ? styles.disabledTimeSlot : ''}`}
             >
               {time}
             </li>
@@ -114,9 +113,7 @@ function TimeModal() {
               onClick={() => handleTimeClick(time)}
               className={`${styles.timeSlot} ${
                 selectedTime === time ? styles.selectedTime : ''
-              } ${
-                availableTimes2.includes(time) ? '' : styles.disabledTimeSlot
-              }`}
+              } ${isTimeDisabled(time, availableTimes1) ? styles.disabledTimeSlot : ''}`}
             >
               {time}
             </li>
@@ -127,9 +124,7 @@ function TimeModal() {
               onClick={() => handleTimeClick(time)}
               className={`${styles.timeSlot} ${
                 selectedTime === time ? styles.selectedTime : ''
-              } ${
-                availableTimes3.includes(time) ? '' : styles.disabledTimeSlot
-              }`}
+              } ${isTimeDisabled(time, availableTimes1) ? styles.disabledTimeSlot : ''}`}
             >
               {time}
             </li>
