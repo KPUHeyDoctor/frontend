@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from '../Resertime.module.css';
 import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 function TimeModal() {
   const location = useLocation();
@@ -36,19 +37,32 @@ function TimeModal() {
       day: '2-digit',
       weekday: 'long'
     }).replace(/\//g, '.');
-
-    const message = `${userName}님! \n'${currentDate} ${selectedTime} ${doctorData.doctorName}의사' 예약이 완료되었습니다.`;
-    alert(message);
-
-    const reservation = {
-      doctorname: doctorData.doctorName,
+  
+    const requestData = {
+      doctorName: doctorData.doctorName,
+      username: userName,
       historyTime: selectedTime,
-      historyBoolean: true,
     };
-
-    saveReservationToLocalStorage(reservation);
-
-    window.location.reload();
+  
+    axios.post('https://tukdoctor.shop/api/reservation/doctor/detail', requestData)
+    .then(() => {
+      const message = `${userName}님! \n'${currentDate} ${selectedTime} ${doctorData.doctorName}의사' 예약이 완료되었습니다.`;
+      alert(message);
+  
+      const reservation = {
+        doctorName: doctorData.doctorName,
+        selectedTime: selectedTime,
+        currentDate: currentDate,
+        historyBoolean: true, // 예약 확인 여부
+      };
+  
+      saveReservationToLocalStorage(reservation);
+  
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   };
   
   const saveReservationToLocalStorage = (reservation) => {

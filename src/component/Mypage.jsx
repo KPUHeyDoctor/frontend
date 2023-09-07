@@ -29,11 +29,11 @@ function Mypage() {
             <h2 className={styles.userName}>{userName}님의 예약 내역</h2>
             <div className={styles.list}>
               <ul>
-                {reservations.map((reservation, index) => (
-                  <li key={index}>
-                    {reservation.doctorname} - {reservation.historyTime} - {reservation.historyBoolean ? '확인됨' : '미확인'}
-                  </li>
-                ))}
+              {reservations.map((reservation, index) => (
+                <li key={index}>
+                  {reservation.currentDate} {reservation.selectedTime} {reservation.doctorName} - {reservation.historyBoolean ? '확인됨' : '미확인'}
+                </li>
+              ))}
               </ul>
             </div>
           </>
