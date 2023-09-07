@@ -7,19 +7,21 @@ function EnterMain() {
 
   useEffect(() => {
     if (enterpriseName) {
-      axios.get('https://tukdoctor.shop/api/history/enterprise', {
-        params: {
-          enterpriseName: enterpriseName
-        }
-      })
-      .then(response => {
-        const newData = response.data;
-        console.log(newData);
-        setDataList(prevDataList => [newData, ...prevDataList]);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+      axios
+        .get('https://tukdoctor.shop/api/history/enterprise', {
+          params: {
+            enterpriseName: enterpriseName,
+          },
+        })
+        .then((response) => {
+          const newData = response.data;
+          console.log(newData);
+          newData.sort((a, b) => (a.historyTime > b.historyTime ? -1 : 1));
+          setDataList(newData);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
   }, [enterpriseName]);
 
@@ -30,9 +32,9 @@ function EnterMain() {
           <h1>{enterpriseName} 예약내역</h1>
           <ul>
             {dataList.map((data, index) => (
-              <li key={index}>
-                <p>사용자: {data.userName}</p>
-                <p>의사: {data.doctorName}</p>
+              <li>
+                <p>사용자: {data.username}</p>
+                <p>의사: {data.doctorname}</p>
                 <p>예약 시간: {data.historyTime}</p>
               </li>
             ))}
