@@ -8,6 +8,7 @@ function Mypage() {
 
   useEffect(() => {
     const storedUserName = localStorage.getItem('userName');
+    console.log('userName:' + storedUserName);
     if (storedUserName) {
       setUserName(storedUserName);
     }
@@ -19,9 +20,9 @@ function Mypage() {
 
     const userReservations = storedReservations.filter(reservation => reservation.username === userName);
     console.log('사용자 예약 데이터:', userReservations);
-    
+
     setReservations(userReservations.reverse());
-  }, []);
+  }, [userName]);
 
   return (
     <>
