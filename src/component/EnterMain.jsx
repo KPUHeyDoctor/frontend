@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function EnterMain() {
-  const [dataList, setDataList] = useState(null);
+  const [dataList, setDataList] = useState([]);
   const enterpriseName = localStorage.getItem('enterpriseName');
 
   useEffect(() => {
@@ -14,6 +14,7 @@ function EnterMain() {
       })
       .then(response => {
         const newData = response.data;
+        console.log(newData);
         setDataList(prevDataList => [newData, ...prevDataList]);
       })
       .catch(error => {

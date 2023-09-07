@@ -57,7 +57,7 @@ function TimeModal() {
   
     axios.post('https://tukdoctor.shop/api/reservation/doctor/detail', requestData)
     .then((response) => {
-      const { count } = response.data;
+      const count = response.data;
       const message = `${userName}님! \n'${currentDate} ${selectedTime} ${doctorData.doctorName}의사' 예약이 완료되었습니다. \n예약인원: ${count + 1} 대기시간: ${count*10}분`;
       alert(message);
   

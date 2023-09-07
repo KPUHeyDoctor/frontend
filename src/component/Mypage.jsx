@@ -37,7 +37,8 @@ function Mypage() {
               <ul className={styles.list}>
                 {reservations.map((reservation, index) => (
                   <li key={index} className={styles.reservationItem}>
-                    {reservation.currentDate} {reservation.selectedTime} {reservation.doctorName} - {reservation.historyBoolean ? '확인됨' : '미확인'}
+                    {reservation.currentDate} {reservation.selectedTime} {reservation.doctorName}
+                    {/* - {reservation.historyBoolean ? '확인됨' : '미확인'} */}
                   </li>
                 ))}
               </ul>
